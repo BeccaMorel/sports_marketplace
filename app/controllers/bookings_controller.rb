@@ -5,6 +5,7 @@ class BookingsController < ApplicationController
     @equipment = Equipment.find(current_user)
     @bookings = Booking.all
   end
+  
 
   def create
   end
