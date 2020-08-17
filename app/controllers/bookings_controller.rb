@@ -1,6 +1,11 @@
 class BookingsController < ApplicationController
+
   def index
+    raise
+    @equipment = Equipment.find(current_user)
+    @bookings = Booking.all
   end
+  
 
   def create
     @equipment = Equipment.find(params[:equipment_id])
@@ -23,5 +28,8 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:date)
+
+  def set_user
+   
   end
 end
