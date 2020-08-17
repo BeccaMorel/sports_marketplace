@@ -2,6 +2,10 @@ class EquipmentsController < ApplicationController
   def index
   end
 
+  def show
+    @equipment = Equipment.find(params[:id])
+  end
+
   def new
   end
 
@@ -11,6 +15,9 @@ class EquipmentsController < ApplicationController
   def update
   end
 
-  def show
+  private
+
+  def equipment_params
+    params.require(:equipment).permit(:name, :description, :price, :photos [])
   end
 end
