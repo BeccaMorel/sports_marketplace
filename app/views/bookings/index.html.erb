@@ -1,0 +1,17 @@
+<h1>My Dashboard</h1>
+
+<h2>My Stuff</h2>
+
+
+
+
+<ul>
+<% @bookings.each do |booking| %>
+  <li>
+    <%= booking.id %>
+    <%= booking.equipment.name %>
+  </li>
+<% end %>
+</ul>
+
+<%= current_user %>
