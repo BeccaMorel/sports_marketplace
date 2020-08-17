@@ -1,2 +1,14 @@
-<h1>Equipments#show</h1>
-<p>Find me in app/views/equipments/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h1><%= @equipment.name %>/h1>
+
+    <%= cl_image_tag @equipment.photos %>
+
+
+    <%= simple_form_for [@equipment, Booking.new] do |f| %>
+      <%= f.input :date %>
+      <%= d.submit "Add ingredient", class: "btn" %>
+    <% end %>
+
+  </div>
+</div>
