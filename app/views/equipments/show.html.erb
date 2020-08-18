@@ -13,17 +13,18 @@
 
       <div class="booking border p-3 mb-3">
         <%= simple_form_for [@equipment, Booking.new] do |f| %>
-          <%= f.input :date, as: :date, html5: true %>
+          <%= f.input :date, as: :date %>
+          <%= f.input :days %>
+          <p>Total price: <span id="total-price"><strong><%= @equipment.price %></strong></span>CAD</p>
           <%= f.submit "Book now!", class: "btn border" %>
         <% end %>
       </div>
     </div>
 
     <div class="description mx-3 my-5">
-      <p>Description: <%= @equipment.description %></p>
-      <p>Price: <%= @equipment.price %>CAD</p>
-      <% @bookings.each do |booking| %>
-      <% end %>
+      <p><strong>Description:</strong> <%= @equipment.description %></p>
+      <p><strong>Price:</strong> <%= @equipment.price %>CAD</p>
+      <p><strong>Owner:</strong> <%= User.find(@equipment.user_id).first_name %></p>
     </div>
 
   </div>
