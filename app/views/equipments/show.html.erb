@@ -1,14 +1,28 @@
 <div class="container">
   <div class="row">
-    <h1><%= @equipment.name %>/h1>
+    <div class="flex-column">
+      <div class="title">
+        <h1><%= @equipment.name %></h1>
+      </div>
 
-    <%= cl_image_tag @equipment.photos %>
+      <div class="photo mb-3">
+        <%= cl_image_tag("z91jkmkpt3qfsz1zxkwk", width: 400, crop: :fill, alt: "sport equipments") %>
+      </div>
 
+      <div class="booking border p-3 mb-3">
+        <%= simple_form_for [@equipment, Booking.new] do |f| %>
+          <%= f.input :date, as: :date, html5: true %>
+          <%= f.submit "Book now!", class: "btn border" %>
+        <% end %>
+      </div>
+    </div>
 
-    <%= simple_form_for [@equipment, Booking.new] do |f| %>
-      <%= f.input :date %>
-      <%= d.submit "Add ingredient", class: "btn" %>
-    <% end %>
+    <div class="description mx-3 my-5">
+      <p>Description: <%= @equipment.description %></p>
+      <p>Price: <%= @equipment.price %>CAD</p>
+      <% @bookings.each do |booking| %>
+      <% end %>
+    </div>
 
   </div>
 </div>

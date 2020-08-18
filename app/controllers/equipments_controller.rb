@@ -5,6 +5,8 @@ class EquipmentsController < ApplicationController
 
   def show
     @equipment = Equipment.find(params[:id])
+    @booking = Booking.new
+    @bookings = @equipment.bookings
   end
 
   def new
@@ -13,7 +15,8 @@ class EquipmentsController < ApplicationController
 
   def create
     @equipment = Equipment.new(equipment_params)
-    @equipment.user = current_user
+    @equipment.user_id = current_user.id
+    #@equipment.user = current_user
     if @equipment.save
       redirect_to equipment_path(@equipment)
     else
@@ -22,12 +25,6 @@ class EquipmentsController < ApplicationController
   end
 
   def update
-  end
-
-  private
-
-  def equipment_params
-    params.require(:equipment).permit(:name, :description, :price, :photos [])
   end
 
   private
