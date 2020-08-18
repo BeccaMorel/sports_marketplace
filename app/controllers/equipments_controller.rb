@@ -17,7 +17,6 @@ class EquipmentsController < ApplicationController
     @equipment = Equipment.new(equipment_params)
     @equipment.user_id = current_user.id
     #@equipment.user = current_user
-    raise
     if @equipment.save
       redirect_to equipment_path(@equipment)
     else

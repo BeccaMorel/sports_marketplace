@@ -1,7 +1,5 @@
 class BookingsController < ApplicationController
   def index
-    @equipment = Equipment.find(current_user)
-    @bookings = Booking.all
   end
 
   def create
