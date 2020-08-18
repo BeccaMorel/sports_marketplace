@@ -30,7 +30,7 @@ class EquipmentsController < ApplicationController
 
   def update
     @equipment = Equipment.find(params[:id])
-    @equipment = Equipment.update(equipment_params)
+    @equipment.update(equipment_params)
 
     redirect_to equipment_path(@equipment)
   end
