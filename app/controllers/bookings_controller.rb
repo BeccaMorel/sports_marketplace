@@ -1,9 +1,25 @@
 class BookingsController < ApplicationController
 
   def index
-    raise
-    @equipment = Equipment.find(current_user)
-    @bookings = Booking.all
+    @message = "None"
+    begin
+      @equipments = Equipment.where(user_id: current_user)
+    rescue ActiveRecord::RecordNotFound 
+      @equipments = []
+    end
+    @requests = []
+    begin
+      @equipments.each do |item|
+        @requests << Booking.where( equipment_id: item.id)
+      end
+    rescue ActiveRecord::RecordNotFound 
+      @requests = []
+    end
+    begin
+      @bookings = Booking.find(user_id: current_user)
+    rescue ActiveRecord::RecordNotFound
+      @bookings = []
+    end
   end
   
 
@@ -28,7 +44,7 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:date)
-
+  end
   def set_user
    
   end

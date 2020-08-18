@@ -1,17 +1,42 @@
 <h1>My Dashboard</h1>
 
 <h2>My Stuff</h2>
-
-
-
-
-<ul>
-<% @bookings.each do |booking| %>
-  <li>
-    <%= booking.id %>
-    <%= booking.equipment.name %>
-  </li>
+<% if @equipments.empty? %>
+  <%= @message %>
+<% else %>
+  <% @equipments.each do |equipment| %>
+    <li>
+      id => <%= equipment.id %>
+      equipment name => <%= equipment.name %>
+    </li>
+  <% end %>
 <% end %>
-</ul>
 
-<%= current_user %>
+<h2>My Requests</h2>
+<% if @requests.empty? %>  
+  <%= @message %>
+<% else %>
+  <% @requests.each do |request| %>
+    <li>
+      booking id =><%= request.id%> request date =><%= request.date %><br>
+      status =><%= request.status %><br>
+      equipment to book =><%= request.equipment.name%><br>
+      user that needs it =><%= request.user.first_name %>
+    </li>
+  <% end %>
+<% end %>
+
+<h2>My Bookings</h2>
+<% if @bookings.empty? %>
+  <%= @message %>
+<% else %>
+  <ul>
+  <% @bookings.each do |booking| %>
+    <li>
+      booking id =><%= booking.id %> request date =><%= booking.date %><br>
+      equipment to book =><%= booking.equipment.name%><br>
+      user owning the equipment =><%= booking.equipment.user.first_name %>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
