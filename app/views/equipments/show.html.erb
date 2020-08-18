@@ -25,9 +25,11 @@
       <p><strong>Description:</strong> <%= @equipment.description %></p>
       <p><strong>Price:</strong> <%= @equipment.price %>CAD</p>
       <p><strong>Owner:</strong> <%= User.find(@equipment.user_id).first_name %></p>
+      <p><%= link_to "Edit", edit_equipment_path(@equipment) %></p>
     </div>
+
+    <%= link_to "Return to all equipment", equipments_path %>
 
   </div>
 </div>
 
-<%= link_to "Return to all equipment", equipments_path %>
