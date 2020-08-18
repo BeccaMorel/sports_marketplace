@@ -4,7 +4,7 @@ class CreateEquipments < ActiveRecord::Migration[6.0]
       t.string :name
       t.text :description
       t.integer :price
-      t.boolean :booked, default: true
+      t.boolean :booked, default: false
       t.references :user, null: false, foreign_key: true
       t.timestamps
     end
