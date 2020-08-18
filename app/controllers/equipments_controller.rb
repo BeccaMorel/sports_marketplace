@@ -35,6 +35,12 @@ class EquipmentsController < ApplicationController
     redirect_to equipment_path(@equipment)
   end
 
+  def destroy
+    @equipment = Equipment.find(params[:id])
+    @equipment.destroy
+      redirect_to equipments_path
+  end
+
   private
 
   def equipment_params
