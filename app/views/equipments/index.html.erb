@@ -4,9 +4,17 @@
 <ul>
   <% @equipments.each do |equipment| %>
   <li>
-    <%= link_to equipment.name, equipment_path(equipment) %> owned by <strong><%= User.find(equipment.user_id).first_name %></strong>
+    <div class="photos">
+     <% equipment.photos.each do |photo| %>
+      <%= cl_image_tag photo.key%>
+       <% end %>
+    </div>
+    <div>
+       <%= link_to equipment.name, equipment_path(equipment) %> owned by <strong><%= User.find(equipment.user_id).first_name %></strong>
+     <% end %>
+    </div>
   </li>
-<% end %>
 </ul>
 
 <%= link_to "Add Equipment", new_equipment_path %>
+
