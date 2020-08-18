@@ -3,7 +3,8 @@
 
 <ul>
 <% @equipments.each do |equipment| %>
-<li><%= link_to equipment.name, equipment_path(equipment) %></li>
+<li><%= link_to equipment.name, equipment_path(equipment) %> owned by <%= User.find(equipment.user_id).first_name%> <%= User.find(equipment.user_id).last_name%></li>
 <% end %>
 </ul>
 
+<%= link_to "Add Equipment", new_equipment_path %>
