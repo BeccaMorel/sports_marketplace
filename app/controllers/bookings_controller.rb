@@ -1,11 +1,8 @@
 class BookingsController < ApplicationController
-
   def index
-    raise
     @equipment = Equipment.find(current_user)
     @bookings = Booking.all
   end
-  
 
   def create
     @equipment = Equipment.find(params[:equipment_id])
@@ -13,11 +10,12 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
 
     @booking.equipment = @equipment
+    @booking.user = current_user
 
     if @booking.save
       redirect_to equipment_path(@equipment)
     else
-      render 'equipment/show'
+      render 'equipments/show'
     end
   end
 
@@ -28,8 +26,9 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:date)
+  end
 
   def set_user
-   
+
   end
 end
