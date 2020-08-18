@@ -6,7 +6,9 @@
       </div>
 
       <div class="photo mb-3">
-        <%= cl_image_tag("z91jkmkpt3qfsz1zxkwk", width: 400, crop: :fill, alt: "sport equipments") %>
+        <% @equipment.photos.each do |photo| %>
+       <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+        <% end %>
       </div>
 
       <div class="booking border p-3 mb-3">
@@ -26,3 +28,5 @@
 
   </div>
 </div>
+
+<%= link_to "Return to all equipment", equipments_path %>
