@@ -27,6 +27,12 @@ class EquipmentsController < ApplicationController
   def update
   end
 
+  def destroy
+    @equipment = Equipment.find(params[:id])
+    @equipment.destroy
+      redirect_to equipments_path
+  end
+
   private
 
   def equipment_params

@@ -30,3 +30,8 @@
 </div>
 
 <%= link_to "Return to all equipment", equipments_path %>
+
+<%= link_to "Delete",
+            equipment_path(@equipment),
+            method: :delete,
+            data: { confirm: "Are you sure you want to delete #{@equipment.name}?" } %>
