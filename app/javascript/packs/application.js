@@ -7,6 +7,8 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require ("moment")
+require ("bootstrap-datetimepicker")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -24,6 +26,7 @@ require("channels")
 
 // External imports
 import "bootstrap";
+import { change_price } from "../channels/show_equipments";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -31,4 +34,8 @@ import "bootstrap";
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
+  if (document.getElementById("total-price")) {
+    change_price();
+  };
+
 });
