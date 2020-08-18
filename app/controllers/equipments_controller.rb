@@ -5,6 +5,8 @@ class EquipmentsController < ApplicationController
 
   def show
     @equipment = Equipment.find(params[:id])
+    @booking = Booking.new
+    @bookings = @equipment.bookings
   end
 
   def new
