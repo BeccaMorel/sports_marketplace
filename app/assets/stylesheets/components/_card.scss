@@ -1,0 +1,27 @@
+
+
+.photos {
+  border: 2px solid red;
+  border-radius: 15px;
+  width: 200px;
+  height: 200px;
+  // margin: 0px;
+}
+
+// ul {
+//   border: 10px, solid, red;
+// }
+
+.photos img {
+  width: 100%
+}
+
+.equip-card-container {
+  border: 5px solid green;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.equip-card {
+  border: 5px solid blue;
+}
