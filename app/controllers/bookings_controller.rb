@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
     @requests = []
     begin
       @equipments.each do |item|
-        @requests << Booking.where( equipment_id: item.id)
+        @requests << Booking.where( equipment_id: item.id, status: "pending" )
       end
     rescue ActiveRecord::RecordNotFound 
       @requests = []
@@ -39,6 +39,7 @@ class BookingsController < ApplicationController
   end
 
   def update
+
   end
 
   private
