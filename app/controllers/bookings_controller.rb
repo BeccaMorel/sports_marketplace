@@ -1,9 +1,8 @@
 class BookingsController < ApplicationController
 
   def index
-    raise
-    @equipment = Equipment.find(current_user)
     @bookings = Booking.all
+    # @equipment = Equipment.find(current_user)
   end
   
 

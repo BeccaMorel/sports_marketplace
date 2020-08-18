@@ -2,8 +2,10 @@
 <p>Find me in app/views/equipments/index.html.erb</p>
 
 <ul>
-<% @equipments.each do |equipment| %>
-<li><%= link_to equipment.name, equipment_path(equipment) %></li>
+  <% @equipments.each do |equipment| %>
+  <li>
+    <%= link_to equipment.name, equipment_path(equipment) %> owned by <strong><%= User.find(equipment.user_id).first_name %></strong>
+  </li>
 <% end %>
 </ul>
 
