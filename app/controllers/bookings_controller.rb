@@ -1,5 +1,4 @@
 class BookingsController < ApplicationController
-
   def index
     @message = "None"
     begin
@@ -7,6 +6,7 @@ class BookingsController < ApplicationController
     rescue ActiveRecord::RecordNotFound 
       @equipments = []
     end
+    
     @requests = []
     begin
       @equipments.each do |item|
@@ -15,13 +15,13 @@ class BookingsController < ApplicationController
     rescue ActiveRecord::RecordNotFound 
       @requests = []
     end
+    
     begin
       @bookings = Booking.find(user_id: current_user)
     rescue ActiveRecord::RecordNotFound
       @bookings = []
     end
   end
-  
 
   def create
     @equipment = Equipment.find(params[:equipment_id])
@@ -29,11 +29,12 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
 
     @booking.equipment = @equipment
+    @booking.user = current_user
 
     if @booking.save
       redirect_to equipment_path(@equipment)
     else
-      render 'equipment/show'
+      render 'equipments/show'
     end
   end
 
@@ -44,8 +45,5 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:date)
-  end
-  def set_user
-   
   end
 end
