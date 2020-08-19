@@ -1,6 +1,20 @@
 class EquipmentsController < ApplicationController
   def index
-    @equipments = policy_scope(Equipment).order(:created_at)
+    if params[:search]
+      @equipments = Equipment.where(name: params[:search])
+    else
+      @equipments = policy_scope(Equipment).order(:created_at)
+    end
+
+    @users = User.geocoded # returns equipments with coordinates
+
+    @markers = @users.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { user: user })
+      }
+    end
   end
 
   def show
