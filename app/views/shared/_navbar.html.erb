@@ -1,11 +1,12 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <% if user_signed_in? %>
-    <%= current_user.first_name %> <%= current_user.last_name %>
-  <% else %>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky-top">
+  <div class="collapse navbar-collapse">
     <%= link_to "#", class: "navbar-brand" do %>
       <%= cl_image_tag("riqzvy6cb5yhvbelfzxx") %>
     <% end %>
-  <% end %>
+    <% if user_signed_in? %>
+      <%= current_user.first_name %> <%= current_user.last_name %>
+    <% end %>
+  </div>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
