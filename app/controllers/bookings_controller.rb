@@ -2,11 +2,11 @@ class BookingsController < ApplicationController
   def index
     @message = "None"
     begin
-      @equipments = policy_scope(Equipment)
+      @equipments_all = policy_scope(Equipment)
+      @equipments = @equipments_all.select{|equipment|equipment.user_id == current_user.id }
     rescue ActiveRecord::RecordNotFound
       @equipments = []
     end
-
     @requests_wait = []
     begin
       @equipments.each do |item|

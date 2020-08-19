@@ -6,7 +6,7 @@
 <% else %>
 <ul>
   <% @equipments.each do |equipment| %>
-    <li><%= equipment.name %></li>
+    <li><%= link_to "#{equipment.name}", equipment_path(equipment.id) %></li>
   <% end %>
 </ul>
 <% end %>
