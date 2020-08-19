@@ -31,7 +31,7 @@ class EquipmentsController < ApplicationController
 
   def create
     @equipment = Equipment.new(equipment_params)
-    @equipment.user_id = current_user.id
+    @equipment.user = current_user
 
     authorize(@equipment)
     
