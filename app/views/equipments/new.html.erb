@@ -1,17 +1,19 @@
-<h1>Equipments#new</h1>
-<p>Find me in app/views/equipments/new.html.erb</p>
+<div class="container">
+  <h1>Equipments#new</h1>
+  <p>Find me in app/views/equipments/new.html.erb</p>
 
-<div class="row">
-  <div class="col-3">
-    <%= simple_form_for(@equipment) do |f| %>
-      <%= f.input :name %>
-      <%= f.input :description %>
-      <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-      <%= f.input :price %>
-      <%= f.submit %>
-    <% end %>
+  <div class="row">
+    <div class="col-3">
+      <%= simple_form_for(@equipment) do |f| %>
+        <%= f.input :name %>
+        <%= f.input :description %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+        <%= f.input :price %>
+        <%= f.submit %>
+      <% end %>
+    </div>
   </div>
+
+
+  <%= link_to "Return to all equipment", equipments_path %>
 </div>
-
-
-<%= link_to "Return to all equipment", equipments_path %>
