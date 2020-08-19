@@ -3,7 +3,7 @@ class EquipmentsController < ApplicationController
     if params[:search]
       @equipments = Equipment.where(name: params[:search])
     else
-      @equipments = Equipment.all
+      @equipments = policy_scope(Equipment).order(:created_at)
     end
 
     @users = User.geocoded # returns equipments with coordinates
@@ -21,16 +21,20 @@ class EquipmentsController < ApplicationController
     @equipment = Equipment.find(params[:id])
     @booking = Booking.new
     @bookings = @equipment.bookings
+    authorize(@equipment)
   end
 
   def new
     @equipment = Equipment.new
+    authorize(@equipment)
   end
 
   def create
     @equipment = Equipment.new(equipment_params)
     @equipment.user_id = current_user.id
 
+    authorize(@equipment)
+    
     if @equipment.save
       redirect_to equipment_path(@equipment)
     else
@@ -40,17 +44,19 @@ class EquipmentsController < ApplicationController
 
   def edit
     @equipment = Equipment.find(params[:id])
+    authorize(@equipment)
   end
 
   def update
     @equipment = Equipment.find(params[:id])
     @equipment.update(equipment_params)
-
+    authorize(@equipment)
     redirect_to equipment_path(@equipment)
   end
 
   def destroy
     @equipment = Equipment.find(params[:id])
+    authorize(@equipment)
     @equipment.destroy
       redirect_to equipments_path
   end
