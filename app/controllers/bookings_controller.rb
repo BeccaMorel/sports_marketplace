@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   def index
     @message = "None"
     begin
-      @equipments = Equipment.where(user_id: current_user)
+      @equipments = policy_scope(Booking)
     rescue ActiveRecord::RecordNotFound 
       @equipments = []
     end
@@ -40,6 +40,8 @@ class BookingsController < ApplicationController
     @booking.equipment = @equipment
     @booking.user = current_user
 
+    authorize(@booking)
+
     if @booking.save
       redirect_to equipment_path(@equipment)
     else
@@ -51,6 +53,9 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     status = params[:format]
     @booking.update(status: status)
+
+    authorize(@booking)
+
     redirect_to bookings_path
   end
 
