@@ -57,6 +57,30 @@
             method: :delete,
             data: { confirm: "Are you sure you want to delete #{@equipment.name}?" } %>
     </div>
+
+    <div class="description mx-3 my-5">
+      <h2>Reviews</h2>
+      <% @reviews = @equipment.reviews %>
+      <% if @reviews.empty? %>
+        <%= "-- None --"%>
+      <% else %>
+        <% counter = 1 %>
+
+        <% @reviews.each do |review|%>
+          <ul>
+            <li><strong>N°<%= counter%>:</strong> <%= review.title %></p>
+            <p>
+              <strong>Rating: </strong>
+              <% (review.rating).times do |r| %>
+                <i class="fas fa-star text-primary"></i>
+              <% end %>
+            </p>
+            <p><strong>Content:</strong> <%= review.description %></p></li>
+          </ul>
+          <% counter += 1 %>
+        <% end %>
+      <% end %>
+    </div>
     
   <%= link_to "Return to all equipment", equipments_path %>
     

@@ -41,7 +41,7 @@
         Equipment: <%= request.equipment.name%><br>
         Requested by: <%= request.user.first_name %>
       </li>
-      <%= link_to "Cancel", booking_path(request, request.status = "declined") , method: 'patch'%>
+      <%= link_to "Cancel", booking_path(request, request.status = "canceled") , method: 'patch'%>
     <% end %>
     </ul>
   <% end %>
@@ -59,6 +59,15 @@
      Owner: <%= User.find(booking.equipment.user_id).first_name %>
       <%= User.find(booking.equipment.user_id).last_name %>
     </li>
+    <% if booking.equipment.reviews.empty? %>
+      <%= link_to "Add a review", new_booking_review_path(booking.id) %>
+    <% else %>
+      <% review = booking.equipment.reviews.find{|review| review.user_id == current_user.id} %>
+      <%= "Review: "%>
+      <% (review.rating).times do |r| %>
+          <i class="fas fa-star text-primary"></i>
+      <% end %>
+    <% end %>
   <% end %>
   </ul>
 <% end %>
