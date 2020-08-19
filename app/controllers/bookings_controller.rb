@@ -7,17 +7,26 @@ class BookingsController < ApplicationController
       @equipments = []
     end
     
-    @requests = []
+    @requests_wait = []
     begin
       @equipments.each do |item|
-        @requests = Booking.where( equipment_id: item.id, status: "pending" )
+        @requests_wait = Booking.where( equipment_id: item.id, status: "pending" )
       end
     rescue ActiveRecord::RecordNotFound 
-      @requests = []
+      @requests_wait = []
+    end
+
+    @requests_on = []
+    begin
+      @equipments.each do |item|
+        @requests_on = Booking.where( equipment_id: item.id, status: "in progress" )
+      end
+    rescue ActiveRecord::RecordNotFound 
+      @requests_on = []
     end
     
     begin
-      @bookings = Booking.find(user_id: current_user)
+      @bookings = Booking.where(user_id: current_user)
     rescue ActiveRecord::RecordNotFound
       @bookings = []
     end
@@ -40,8 +49,9 @@ class BookingsController < ApplicationController
 
   def update
     @booking = Booking.find(params[:id])
-    @booking.status if accept
-
+    status = params[:format]
+    @booking.update(status: status)
+    redirect_to bookings_path
   end
 
   private
@@ -49,4 +59,5 @@ class BookingsController < ApplicationController
   def booking_params
     params.require(:booking).permit(:date)
   end
+
 end

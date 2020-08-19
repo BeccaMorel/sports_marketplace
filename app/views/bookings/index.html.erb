@@ -2,40 +2,62 @@
 
 <h2>My Stuff</h2>
 <% if @equipments.empty? %>
-  <%= @message %>
+  <p>-- <%= @message %> --</p>
 <% else %>
+<ul>
   <% @equipments.each do |equipment| %>
-    <li>
-      id => <%= equipment.id %>
-      equipment name => <%= equipment.name %>
-    </li>
+    <li><%= equipment.name %></li>
   <% end %>
+</ul>
 <% end %>
 
 <h2>My Requests</h2>
-<% if @requests.empty? %>  
-  <%= @message %>
-<% else %>
-  <% @requests.each do |request| %>
-    <li>
-      booking id =><%= request.id%> request date =><%= request.date %><br>
-      status =><%= request.status %><br>
-      equipment to book =><%= request.equipment.name%><br>
-      user that needs it =><%= request.user.first_name %>
-    </li>
+<h3>Waiting for answer</h3>
+  <% if @requests_wait.empty? %>  
+    <p>-- <%= @message %> --</p>
+  <% else %>
+    <ul>
+    <% @requests_wait.each do |request| %>
+      <li>
+        On<%=  request.date %><br>
+        --<%= request.status %>--<br>
+        Equipment: <%= request.equipment.name%><br>
+        Requested by: <%= request.user.first_name %>
+      </li>
+    <%= link_to "Accept", booking_path(request, request.status = "in progress") , method: 'patch'%>
+    <%= link_to "Decline", booking_path(request, request.status = "declined") , method: 'patch'%>
   <% end %>
-<% end %>
+  </ul>
+  <% end %>
+<h3>On Going</h3>
+  <% if @requests_on.empty? %>  
+    <p>-- <%= @message %> --</p>
+  <% else %>
+    <ul>
+    <% @requests_on.each do |request| %>
+      <li>
+        On<%=  request.date %><br>
+        --<%= request.status %>--<br>
+        Equipment: <%= request.equipment.name%><br>
+        Requested by: <%= request.user.first_name %>
+      </li>
+      <%= link_to "Cancel", booking_path(request, request.status = "declined") , method: 'patch'%>
+    <% end %>
+    </ul>
+  <% end %>
 
 <h2>My Bookings</h2>
 <% if @bookings.empty? %>
-  <%= @message %>
+  <p>-- <%= @message %> --</p>
 <% else %>
   <ul>
   <% @bookings.each do |booking| %>
     <li>
-      booking id =><%= booking.id %> request date =><%= booking.date %><br>
-      equipment to book =><%= booking.equipment.name%><br>
-      user owning the equipment =><%= booking.equipment.user.first_name %>
+     On<%= booking.date %><br>
+     --<%= booking.status %>--<br>
+     Equipment: <%= booking.equipment.name%><br>
+     Owner: <%= User.find(booking.equipment.user_id).first_name %>
+      <%= User.find(booking.equipment.user_id).last_name %>
     </li>
   <% end %>
   </ul>
