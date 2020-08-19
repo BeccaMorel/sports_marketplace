@@ -6,23 +6,28 @@ const initMapbox = () => {
 
   mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
   const map = new mapboxgl.Map({
-    container: mapElement,
-    pitch: 60,
-    zoom: 30
+    container: "map",
+    style: 'mapbox://styles/mapbox/streets-v10',
+    zoom: 40
   });
 
   const markers = JSON.parse(mapElement.dataset.markers);
 
   markers.forEach((marker) => {
-    const popup = new mapboxgl.Popup().setHTML(marker.info_window);
+    const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
 
-    new mapboxgl.Marker().setLngLat([ marker.lng, marker.lat ]).setPopup(popup).addTo(map);
+    new mapboxgl.Marker()
+      .setLngLat([ marker.lng, marker.lat ])
+      .setPopup(popup)
+      .addTo(map);
   });
 
   fitMapToMarkers(map, markers);
 
-  map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
-    mapboxgl: mapboxgl }));
+  map.addControl(new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl
+  }));
 }
 
 const fitMapToMarkers = (map, markers) => {

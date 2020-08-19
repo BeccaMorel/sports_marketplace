@@ -34,7 +34,7 @@ class EquipmentsController < ApplicationController
     @equipment.user_id = current_user.id
 
     authorize(@equipment)
-    
+
     if @equipment.save
       redirect_to equipment_path(@equipment)
     else
