@@ -34,6 +34,17 @@
           <p><strong>Description:</strong> <%= @equipment.description %></p>
           <p><strong>Price:</strong> <%= @equipment.price %>CAD</p>
           <p><strong>Owner:</strong> <%= User.find(@equipment.user_id).first_name %></p>
+          
+          <% if policy(@equipment).edit? %>
+            <p><%= link_to "Edit", edit_equipment_path(@equipment) %></p>
+          <% end %>
+
+          <% if policy(@equipment).destroy? %>
+            <p><%= link_to "Delete",
+              equipment_path(@equipment),
+              method: :delete,
+              data: { confirm: "Are you sure you want to delete #{@equipment.name}?" } %></p>
+          <% end %>
         </div>
       </div>
 
@@ -46,19 +57,5 @@
         <% end %>
       </div>
     </div>
-
-    <div class="description mx-3 my-5">
-      <p><strong>Description:</strong> <%= @equipment.description %></p>
-      <p><strong>Price:</strong> <%= @equipment.price %>CAD</p>
-      <p><strong>Owner:</strong> <%= User.find(@equipment.user_id).first_name %></p>
-      <p><%= link_to "Edit", edit_equipment_path(@equipment) %></p>
-      <%= link_to "Delete",
-            equipment_path(@equipment),
-            method: :delete,
-            data: { confirm: "Are you sure you want to delete #{@equipment.name}?" } %>
-    </div>
-    
-  <%= link_to "Return to all equipment", equipments_path %>
-    
   </div>
 </div>
