@@ -16,7 +16,7 @@ class EquipmentsController < ApplicationController
   def create
     @equipment = Equipment.new(equipment_params)
     @equipment.user_id = current_user.id
-    #@equipment.user = current_user
+
     if @equipment.save
       redirect_to equipment_path(@equipment)
     else
@@ -24,7 +24,15 @@ class EquipmentsController < ApplicationController
     end
   end
 
+  def edit
+    @equipment = Equipment.find(params[:id])
+  end
+
   def update
+    @equipment = Equipment.find(params[:id])
+    @equipment.update(equipment_params)
+
+    redirect_to equipment_path(@equipment)
   end
 
   def destroy
