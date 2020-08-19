@@ -1,4 +1,4 @@
-const changePrice = () => {
+const change_price = () => {
   const booking = document.getElementById("booking_days");
   const initialPrice = document.getElementById("total-price").innerText;
   booking.addEventListener("input", (event) => {
@@ -8,4 +8,4 @@ const changePrice = () => {
   });
 };
 
-export { changePrice };
+export { change_price };
