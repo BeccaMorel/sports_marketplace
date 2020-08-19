@@ -2,17 +2,17 @@ class BookingsController < ApplicationController
   def index
     @message = "None"
     begin
-      @equipments = policy_scope(Booking)
-    rescue ActiveRecord::RecordNotFound 
+      @equipments = policy_scope(Equipment)
+    rescue ActiveRecord::RecordNotFound
       @equipments = []
     end
-    
+
     @requests_wait = []
     begin
       @equipments.each do |item|
         @requests_wait = Booking.where( equipment_id: item.id, status: "pending" )
       end
-    rescue ActiveRecord::RecordNotFound 
+    rescue ActiveRecord::RecordNotFound
       @requests_wait = []
     end
 
@@ -21,10 +21,10 @@ class BookingsController < ApplicationController
       @equipments.each do |item|
         @requests_on = Booking.where( equipment_id: item.id, status: "in progress" )
       end
-    rescue ActiveRecord::RecordNotFound 
+    rescue ActiveRecord::RecordNotFound
       @requests_on = []
     end
-    
+
     begin
       @bookings = Booking.where(user_id: current_user)
     rescue ActiveRecord::RecordNotFound

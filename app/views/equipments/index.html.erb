@@ -3,6 +3,11 @@
     <h1>Sport Equipments</h1>
     <p>What sport are you going to try today?</p>
 
+    <form class="form-inline m-3">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search equipment..." aria-label="Search" name="search">
+      <button class="btn my-2 my-sm-0 border" type="submit">Search</button>
+    </form>
+
     <div class="equip-card-container">
       <% @equipments.each do |equipment| %>
       <div class="equip-card m-2">
