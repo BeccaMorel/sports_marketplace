@@ -49,7 +49,9 @@ class BookingsController < ApplicationController
     authorize(@booking)
     if @booking.save
       redirect_to equipment_path(@equipment)
+      flash[:notice] = "Request done to #{User.find(@equipment.user_id).first_name}! Go to Dashboard to see status"
     else
+      flash.now[:notice] = "Request could not be made or has already been done"
       render 'equipments/show'
     end
   end
