@@ -62,13 +62,13 @@
         <%= User.find(booking.equipment.user_id).last_name %><br>
       <%= link_to "Cancel Booking", booking_path(booking) , method: 'delete', data: { confirm: "Are you sure you want to cancel the booking ?" } %>
       </li>
-      <% if booking.equipment.reviews.empty? %>
+      <% review = booking.equipment.reviews.find{|review| review.user_id == current_user.id} %>
+      <% if review.nil? %>
         <%= link_to "Add a review", new_booking_review_path(booking.id) %>
       <% else %>
-        <% review = booking.equipment.reviews.find{|review| review.user_id == current_user.id} %>
         <%= "Review: "%>
         <% (review.rating).times do |r| %>
-            <i class="fas fa-star text-primary"></i>
+          <i class="fas fa-star text-primary"></i>
         <% end %>
         <% (5 - (review.rating)).times do |r| %>
           <i class="far fa-star text-primary"></i>
