@@ -30,7 +30,10 @@ class BookingsController < ApplicationController
     end
 
     begin
-      @bookings = Booking.where(user_id: current_user)
+      @bookings = []
+      Booking.where(user_id: current_user).each do |booking|
+        @bookings << booking unless booking.status == "canceled"
+      end
     rescue ActiveRecord::RecordNotFound
       @bookings = []
     end
