@@ -6,7 +6,7 @@ class EquipmentsController < ApplicationController
       policy_scope(Equipment)
       if @equipments.empty?
         @equipments = policy_scope(Equipment).order(:created_at)
-        flash[:alert] = "Product not found"
+        flash[:notice] = "Product not found"
       end
     else
       @equipments = policy_scope(Equipment).order(:created_at)
