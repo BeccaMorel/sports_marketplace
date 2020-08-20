@@ -3,27 +3,34 @@
 .photos {
   border: 2px solid red;
   border-radius: 15px;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   // margin: 0px;
 }
 
-// ul {
-//   border: 10px, solid, red;
-// }
-
 .photos img {
-  width: 100%
-}
-
-.equip-card-container {
-  border: 5px solid grey;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  border-radius: 15px;
 }
 
 .equip-card {
   border: 5px solid blue;
+  height: 200px;
+  justify-content: center;
+}
+
+.equip-text {
+  text-align: center;
+  line-height: 20px;
+}
+
+.equip-text a {
+  color: black;
+  text-decoration: none;
+}
+
+.equip-text a:hover {
+  opacity: 0.25;
 }
 
 .card-new {
