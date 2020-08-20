@@ -69,4 +69,3 @@ gem 'geocoder'
 
 gem "algoliasearch-rails"
 
-
