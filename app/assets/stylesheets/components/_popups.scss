@@ -1,0 +1,21 @@
+.modal-content {
+  border-radius: 20px;
+  .modal-header {
+      justify-content: center;
+    }
+  .modal-footer {
+    justify-content: center; 
+      .btn {
+        background-color: #009f3d;
+        padding: 7px 212px;
+        border-radius: 12px;
+      }
+    }
+}
+
+#user_email {
+  border-radius: 12px;
+} 
+#user_password {
+  border-radius: 12px;
+}
