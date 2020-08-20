@@ -8,6 +8,10 @@ class BookingPolicy < ApplicationPolicy
     return user_is_owner_or_admin?
   end
 
+  def destroy?
+    return true
+  end
+
   private
 
    def user_is_owner_or_admin?
