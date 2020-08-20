@@ -56,13 +56,13 @@ class BookingsController < ApplicationController
   def update
     @booking = Booking.find(params[:id])
     status = params[:format]
-    booked = status.match?"in progress"
+    booked = status.match? "in progress"
     authorize(@booking)
     @booking.update(status: status)
     @booking.equipment.update(booked: booked)
     redirect_to bookings_path
   end
-  
+
   def destroy
     @booking = Booking.find(params[:id])
     @booking.equipment.booked = false
@@ -76,5 +76,4 @@ class BookingsController < ApplicationController
   def booking_params
     params.require(:booking).permit(:date)
   end
-
 end
