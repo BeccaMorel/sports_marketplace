@@ -1,7 +1,7 @@
 class EquipmentsController < ApplicationController
   def index
     if params[:search]
-      @equipments = Equipment.where(name: params[:search])
+      @equipments = policy_scope(Equipment).where(name: params[:search])
     else
       @equipments = policy_scope(Equipment).order(:created_at)
     end
