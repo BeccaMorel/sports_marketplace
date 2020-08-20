@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :equipments, dependent: :destroy
   has_many :bookings, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   validates :email, uniqueness: true
   validates :address, presence: true
   geocoded_by :address
