@@ -5,7 +5,7 @@ class BookingPolicy < ApplicationPolicy
   end
   
   def update?
-    return user_is_owner_or_admin?
+    return true
   end
 
   def destroy?
