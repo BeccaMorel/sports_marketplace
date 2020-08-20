@@ -30,7 +30,10 @@ class BookingsController < ApplicationController
     end
 
     begin
-      @bookings = Booking.where(user_id: current_user)
+      @bookings = []
+      Booking.where(user_id: current_user).each do |booking|
+        @bookings << booking unless booking.status == "canceled"
+      end
     rescue ActiveRecord::RecordNotFound
       @bookings = []
     end
@@ -58,14 +61,6 @@ class BookingsController < ApplicationController
     authorize(@booking)
     @booking.update(status: status)
     @booking.equipment.update(booked: booked)
-    redirect_to bookings_path
-  end
-
-  def destroy
-    @booking = Booking.find(params[:id])
-    @booking.equipment.booked = false
-    authorize(@booking)
-    @booking.destroy
     redirect_to bookings_path
   end
 
