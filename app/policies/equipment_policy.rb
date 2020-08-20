@@ -11,11 +11,11 @@ class EquipmentPolicy < ApplicationPolicy
   def update?
     return user_is_owner_or_admin?
   end
-  
+
   def destroy?
     return user_is_owner_or_admin?
   end
-  
+
   class Scope < Scope
     def resolve
       # `scope` == Equipment class itself
@@ -25,7 +25,7 @@ class EquipmentPolicy < ApplicationPolicy
   end
 
   private
-  
+
   def user_is_owner_or_admin?
     # `record` == the equipment we passed in (usually @equipment)
     # `user` == current_user

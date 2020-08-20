@@ -7,11 +7,9 @@ class BookingPolicy < ApplicationPolicy
   def update?
     return user_is_owner_or_admin?
   end
-  
-  class Scope < Scope
-    def resolve
-      scope.where(user: user)
-    end
+
+  def destroy?
+    return true
   end
 
   private

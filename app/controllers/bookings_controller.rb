@@ -10,7 +10,9 @@ class BookingsController < ApplicationController
     @requests_wait = []
     begin
       @equipments.each do |item|
-        @requests_wait = Booking.where( equipment_id: item.id, status: "pending" )
+        Booking.where( equipment_id: item.id, status: "pending" ).each do |booking|
+          @requests_wait << booking
+        end
       end
     rescue ActiveRecord::RecordNotFound
       @requests_wait = []
@@ -19,7 +21,9 @@ class BookingsController < ApplicationController
     @requests_on = []
     begin
       @equipments.each do |item|
-        @requests_on = Booking.where( equipment_id: item.id, status: "in progress" )
+        Booking.where( equipment_id: item.id, status: "in progress" ).each do |booking|
+          @requests_on << booking
+        end
       end
     rescue ActiveRecord::RecordNotFound
       @requests_on = []
@@ -52,10 +56,18 @@ class BookingsController < ApplicationController
   def update
     @booking = Booking.find(params[:id])
     status = params[:format]
-    @booking.update(status: status)
-
+    booked = status.match?"in progress"
     authorize(@booking)
-
+    @booking.update(status: status)
+    @booking.equipment.update(booked: booked)
+    redirect_to bookings_path
+  end
+  
+  def destroy
+    @booking = Booking.find(params[:id])
+    @booking.equipment.booked = false
+    authorize(@booking)
+    @booking.destroy
     redirect_to bookings_path
   end
 

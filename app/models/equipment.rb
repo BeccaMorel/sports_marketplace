@@ -6,4 +6,15 @@ class Equipment < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   validates :price, presence: true
+
+  include AlgoliaSearch
+
+  algoliasearch do
+    attributes :name, :description, :price
+    add_attribute :extra_attr
+    searchableAttributes ['name', 'description', 'extra_attr']
+  end
+  def extra_attr
+    self.user.first_name
+  end
 end
