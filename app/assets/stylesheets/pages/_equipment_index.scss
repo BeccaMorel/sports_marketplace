@@ -1,28 +1,35 @@
 
+h1 {
+  font-size: 25px;
+}
+
+
+
 .title-search {
   display: flex;
   justify-content: space-between;
-  border: 5px solid green;
   width: 100%;
   align-items: center;
   margin: 0;
 }
 
 .cards-map-container {
-  border: 5px solid magenta;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+
 }
 
 .equip-card-container {
-  border: 5px solid grey;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
+  width: 50%;
 }
 
 .search button {
   border-radius: 20px;
+  justify-content: space-around;
 }
 
 
