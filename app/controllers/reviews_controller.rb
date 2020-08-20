@@ -8,8 +8,9 @@ class ReviewsController < ApplicationController
     def create
       @review = Review.new(review_params)
       @review.user_id = current_user.id
-      @review.equipment_id = @equipment.id 
-
+      @review.equipment_id = @equipment.id
+      
+      @review.booking_id = params[:booking_id]
       authorize(@review)
 
       if @review.save

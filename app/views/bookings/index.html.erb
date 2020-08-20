@@ -43,7 +43,7 @@
           Equipment: <%= request.equipment.name%><br>
           Requested by: <%= request.user.first_name %>
         </li>
-        <%= link_to "Cancel", booking_path(request, request.status = "canceled") , method: 'patch'%>
+        <%= link_to "Cancel", booking_path(request, request.status = "declined") , method: 'patch'%>
       <% end %>
       </ul>
     <% end %>
@@ -52,30 +52,34 @@
   <% if @bookings.empty? %>
     <p class="message">-- <%= @message %> --</p>
   <% else %>
-    <ul>
     <% @bookings.each do |booking| %>
-      <li>
-       On <%= booking.date %><br>
-       --<%= booking.status %>--<br>
-       Equipment: <%= booking.equipment.name%><br>
-       Owner: <%= User.find(booking.equipment.user_id).first_name %>
-        <%= User.find(booking.equipment.user_id).last_name %><br>
-      <%= link_to "Cancel Booking", booking_path(booking) , method: 'delete', data: { confirm: "Are you sure you want to cancel the booking ?" } %>
-      </li>
-      <% review = booking.equipment.reviews.find{|review| review.user_id == current_user.id} %>
-      <% if review.nil? %>
-        <%= link_to "Add a review", new_booking_review_path(booking.id) %>
+      <% unless booking.status == "canceled" %>
+        <ul>
+        <li>
+         On <%= booking.date %><br>
+         --<%= booking.status %>--<br>
+         Equipment: <%= booking.equipment.name%><br>
+         Owner: <%= User.find(booking.equipment.user_id).first_name %>
+          <%= User.find(booking.equipment.user_id).last_name %><br>
+        <%= link_to "Cancel Booking", booking_path(booking, booking.status = "canceled") , method: 'patch', data: { confirm: "Are you sure you want to cancel the booking ?" } %>
+        </li>
+        <% review = booking.equipment.reviews.find{|review| review.user_id == current_user.id && review.booking_id == booking.id } %>
+        <% if review.nil? %>
+          <%= link_to "Add a review", new_booking_review_path(booking.id) %>
+        <% else %>
+          <%= "Review: "%>
+          <% (review.rating).times do |r| %>
+            <i class="fas fa-star text-primary"></i>
+          <% end %>
+          <% (5 - (review.rating)).times do |r| %>
+            <i class="far fa-star text-primary"></i>
+          <% end %>
+        <% end %>
+        </ul>
       <% else %>
-        <%= "Review: "%>
-        <% (review.rating).times do |r| %>
-          <i class="fas fa-star text-primary"></i>
-        <% end %>
-        <% (5 - (review.rating)).times do |r| %>
-          <i class="far fa-star text-primary"></i>
-        <% end %>
+        <p class="message">-- <%= @message %> --</p>
       <% end %>
     <% end %>
-    </ul>
   <% end %>
 
 </div>
