@@ -19,7 +19,7 @@
     <ul>
     <% @requests_wait.each do |request| %>
       <li>
-        On<%=  request.date %><br>
+        On <%= request.date %><br>
         --<%= request.status %>--<br>
         Equipment: <%= request.equipment.name%><br>
         Requested by: <%= request.user.first_name %>
@@ -36,7 +36,7 @@
     <ul>
     <% @requests_on.each do |request| %>
       <li>
-        On<%=  request.date %><br>
+        On <%= request.date %><br>
         --<%= request.status %>--<br>
         Equipment: <%= request.equipment.name%><br>
         Requested by: <%= request.user.first_name %>
@@ -53,7 +53,7 @@
   <ul>
   <% @bookings.each do |booking| %>
     <li>
-     On<%= booking.date %><br>
+     On <%= booking.date %><br>
      --<%= booking.status %>--<br>
      Equipment: <%= booking.equipment.name%><br>
      Owner: <%= User.find(booking.equipment.user_id).first_name %>
