@@ -76,10 +76,14 @@
 
       <div class="booking border p-3 my-3 col-12 col-md-6">
         <%= simple_form_for [@equipment, Booking.new] do |f| %>
-          <%= f.input :date, as: :date %>
-          <%= f.input :days %>
+          <%= date = f.input :date, as: :date %>
+          <%= period = f.input :days %>
           <p>Total price: <span id="total-price"><strong><%= @equipment.price %></strong></span>CAD</p>
-          <%= f.submit "Book now!", class: "btn border" %>
+          <%if Booking.where(date: date, equipment_id: @equipment.id) && @equipment.booked == true %>
+            <%= f.label "*This equipment is unavailable now*" %>
+          <% else %>
+            <%= f.submit "Book now!", class: "btn border" %>
+          <%end%>
         <% end %>
       </div>
     </div>

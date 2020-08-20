@@ -43,9 +43,7 @@ class BookingsController < ApplicationController
 
     @booking.equipment = @equipment
     @booking.user = current_user
-
     authorize(@booking)
-
     if @booking.save
       redirect_to equipment_path(@equipment)
     else

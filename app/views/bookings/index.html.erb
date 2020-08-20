@@ -21,7 +21,7 @@
       <ul class="list-group list-group-flush">
       <% @requests_wait.each do |request| %>
         <li class="list-group-item">
-          On<%=  request.date %><br>
+          On <%=  request.date %><br>
           --<%= request.status %>--<br>
           Equipment: <%= request.equipment.name%><br>
           Requested by: <%= request.user.first_name %>
@@ -38,7 +38,7 @@
       <ul class="list-group list-group-flush">
       <% @requests_on.each do |request| %>
         <li class="list-group-item">
-          On<%=  request.date %><br>
+          On <%=  request.date %><br>
           --<%= request.status %>--<br>
           Equipment: <%= request.equipment.name%><br>
           Requested by: <%= request.user.first_name %>
@@ -55,14 +55,13 @@
     <ul>
     <% @bookings.each do |booking| %>
       <li>
-       On<%= booking.date %><br>
+       On <%= booking.date %><br>
        --<%= booking.status %>--<br>
        Equipment: <%= booking.equipment.name%><br>
        Owner: <%= User.find(booking.equipment.user_id).first_name %>
         <%= User.find(booking.equipment.user_id).last_name %><br>
       <%= link_to "Cancel Booking", booking_path(booking) , method: 'delete', data: { confirm: "Are you sure you want to cancel the booking ?" } %>
       </li>
-
       <% if booking.equipment.reviews.empty? %>
         <%= link_to "Add a review", new_booking_review_path(booking.id) %>
       <% else %>
