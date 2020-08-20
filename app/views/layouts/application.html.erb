@@ -9,14 +9,16 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+    <meta name="algolia-app-id" content="<%= ENV["ALGOLIA_APP_ID"] %>">
+    <meta name="algolia-search-only-api-key" content="<%= ENV["ALGOLIA_SEARCH_ONLY_API_KEY"] %>">
   </head>
 
   <body>
+    <p class="notice m-0"><%= notice %></p>
+    <p class="alert m-0"><%= alert %></p>
+
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <%= yield %>
     <%= render 'shared/footer' %>
   </body>

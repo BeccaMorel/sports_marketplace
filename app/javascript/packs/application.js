@@ -26,6 +26,7 @@ import "bootstrap";
 import { changePrice } from "../channels/show_equipments";
 import { initMapbox } from "../plugins/init_mapbox";
 import { initAutocomplete } from "../plugins/init_autocomplete";
+import { algoliaSearch } from "../plugins/init_algolia_search";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -43,4 +44,5 @@ document.addEventListener('turbolinks:load', () => {
 
   initAutocomplete();
 
+  algoliaSearch();
 });
