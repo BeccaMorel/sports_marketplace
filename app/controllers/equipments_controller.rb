@@ -1,7 +1,13 @@
 class EquipmentsController < ApplicationController
+
   def index
     if params[:search]
-      @equipments = policy_scope(Equipment).where(name: params[:search])
+      @equipments = Equipment.algolia_search(params[:search])
+      policy_scope(Equipment)
+      if @equipments.empty?
+        @equipments = policy_scope(Equipment).order(:created_at)
+        flash[:alert] = "Product not found"
+      end
     else
       @equipments = policy_scope(Equipment).order(:created_at)
     end
