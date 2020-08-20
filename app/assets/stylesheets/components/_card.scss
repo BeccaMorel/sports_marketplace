@@ -1,36 +1,48 @@
 
 
 .photos {
-  border: 2px solid red;
   border-radius: 15px;
   width: 150px;
-  height: 150px;
-  // margin: 0px;
+  // height: 150px;
+  width: 100%;
 }
 
 .photos img {
   width: 100%;
-  border-radius: 15px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 15px 15px 0px 0px;
 }
 
 .equip-card {
-  border: 5px solid blue;
-  height: 200px;
+  border: 1px solid #111D13;
+  // height: fit-content;
   justify-content: center;
+  border-radius: 15px;
+  text-decoration: none;
+  grid-column: span 1;
+
+}
+
+.equip-card:hover {
+  opacity: .75;
+  background-color: #E98A15;
+  text-decoration: none !important;
+  a {
+    text-decoration: none;
+
+  }
 }
 
 .equip-text {
   text-align: center;
   line-height: 20px;
-}
-
-.equip-text a {
   color: black;
   text-decoration: none;
 }
 
-.equip-text a:hover {
-  opacity: 0.25;
+.equip-text:hover{
+  text-decoration: none;
 }
 
 .card-new {
