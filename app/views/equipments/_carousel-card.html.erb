@@ -12,7 +12,6 @@
               <%= cl_image_tag photo.key %>
             <% end %>
             </div>
-          <% end %>
         </div>
         <% if equipment.photos.attached? && equipment.photos.length > 1%>
         <a class="carousel-control-prev" href="#carousel-<%= equipment.id %>" role="button" data-slide="prev">
@@ -31,5 +30,6 @@
         <%= equipment.name.capitalize %> <br> from <strong><%= User.find(equipment.user_id).first_name %></strong>
       </div>
     <% end %>
+  <% end %>
 </div>
 

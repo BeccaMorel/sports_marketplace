@@ -11,7 +11,6 @@ class EquipmentsController < ApplicationController
       @equipments = policy_scope(Equipment).order(:created_at)
     end
 
-
     @users = User.geocoded # returns equipments with coordinates
 
     @markers = @users.map do |user|
