@@ -35,7 +35,7 @@
             <% @requests_wait.each do |request| %>
 
               <div class="card-product">
-                <%= cl_image_tag request.booking.equipment.photos.first.key, class: "m-1" %>
+                <%= cl_image_tag request.equipment.photos.first.key, class: "m-1" %>
                 <div class="card-product-infos">
                   <div class="group-item">
                     <p><strong>Rental date:</strong> <%=  request.date %></p>
