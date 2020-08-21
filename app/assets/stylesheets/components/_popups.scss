@@ -2,24 +2,25 @@
   border-radius: 20px;
   .modal-header {
       justify-content: center;
+      border-bottom: 0px;
     }
   .modal-footer {
     justify-content: center; 
+    border-top: 0px;
       .btn {
-        background-color: #009f3d;
+        background-color:rgba(0, 159, 61, 1);
         color: white;
+        font-weight: bold;
         padding: 7px 212px;
         border-radius: 12px;
         &:hover {
-          background-color: #007a2f;
+          background-color: rgb(1, 134, 52);
         }
       }
     }
 }
 
-#user_email {
+#user_email, #user_password, #user_first_name, #user_last_name,
+#user_address, #user_password_confirmation {
   border-radius: 12px;
 } 
-#user_password {
-  border-radius: 12px;
-}
