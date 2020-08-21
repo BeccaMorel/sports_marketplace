@@ -81,11 +81,7 @@
         <%= date = f.input :date, as: :date %>
         <%= period = f.input :days %>
         <p>Total price: <span id="total-price"><%= @equipment.price %></span>CAD</p>
-        <%if Booking.where(date: date, equipment_id: @equipment.id) && @equipment.booked == true %>
-          <%= f.label "*This equipment is unavailable now*" %>
-        <% else %>
-          <%= f.submit "Book now!", class: "btn" %>
-        <%end%>
+        <%= f.submit "Book now!", class: "btn" %>
       <% end %>
     </div>
 
