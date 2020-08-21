@@ -47,7 +47,7 @@ class BookingsController < ApplicationController
     @booking.equipment = @equipment
     @booking.user = current_user
     authorize(@booking)
-    unless @bookings.find{|book| book.equipment_id = params[:equipment_id] && book.user_id = @booking.user.id && book.status != "canceled"}
+    unless @bookings.find{|book| book.equipment_id = params[:equipment_id] && book.user_id == current_user.id && book.status == "pending"}
       if @booking.save
         redirect_to equipment_path(@equipment)
         flash[:notice] = "Request made to #{User.find(@equipment.user_id).first_name}! Go to Dashboard to see status"
