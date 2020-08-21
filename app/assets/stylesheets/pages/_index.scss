@@ -2,7 +2,4 @@
 @import "home";
 @import "booking_index";
 @import "equipment_index";
-
-body {
-  background-color: $white !important;
-}
+@import "equipment_show";

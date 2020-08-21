@@ -1,0 +1,17 @@
+// .message {
+//   background-color:;
+//   padding: 2px 4px;
+// }
+
+li > a {
+  color: $green;
+  &:hover {
+    text-decoration: none;
+    color: $green;
+    opacity: 0.7;
+  }
+}
+
+h2 {
+  color: $dark-green;
+}

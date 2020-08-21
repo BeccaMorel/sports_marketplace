@@ -1,0 +1,38 @@
+.booking {
+  border: 2px solid $orangy;
+}
+
+#total-price {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 32px;
+  color: $purple;
+}
+
+.title-color {
+  color: $green;
+}
+
+.carousel-center {
+  margin: auto;
+}
+
+.purple-row {
+  border: 2px solid $purple;
+}
+
+
+// <div class="booking p-3 my-3 col-12 col-md-6">
+//         <%= simple_form_for [@equipment, Booking.new] do |f| %>
+//           <%= date = f.input :date, as: :date %>
+//           <%= period = f.input :days %>
+//           <p>Total price: <span id="total-price"><strong><%= @equipment.price %></strong></span>CAD</p>
+//           <%if Booking.where(date: date, equipment_id: @equipment.id) && @equipment.booked == true %>
+//             <%= f.label "*This equipment is unavailable now*" %>
+//           <% else %>
+//             <%= f.submit "Book now!", class: "btn" %>
+//           <%end%>
+//         <% end %>
+//       </div>
