@@ -12,7 +12,9 @@
         <% @equipments.each do |equipment| %>
 
           <div class="card-product">
-            <%= cl_image_tag equipment.photos.first.key, class: "m-1" %>
+            <% if equipment.photos.first %>
+              <%= cl_image_tag equipment.photos.first.key, class: "m-1" %>
+            <% end %>
 
             <div class="card-product-infos">
               <p><%= link_to "Your #{equipment.name}", equipment_path(equipment.id) %> - <%= equipment.booked ? "Currently rented" : "Free for renting" %></p>
@@ -35,7 +37,9 @@
             <% @requests_wait.each do |request| %>
 
               <div class="card-product">
-                <%= cl_image_tag request.equipment.photos.first.key, class: "m-1" %>
+                <% if request.equipment.photos %>
+                  <%= cl_image_tag request.equipment.photos.first.key, class: "m-1" %>
+                <% end %>
                 <div class="card-product-infos">
                   <div class="group-item">
                     <p><strong>Rental date:</strong> <%=  request.date %></p>
@@ -59,7 +63,9 @@
               <% @requests_on.each do |request| %>
 
               <div class="card-product">
-                <%= cl_image_tag request.equipment.photos.first.key, class: "m-1" %>
+                <% if request.equipment.photos %>
+                  <%= cl_image_tag request.equipment.photos.first.key, class: "m-1" %>
+                <% end %>
                 <div class="card-product-infos">
                   <div class="group-item">
                     <p><strong>Rental date:</strong> <%=  request.date %></p>
@@ -87,7 +93,9 @@
             <% @bookings.each do |booking| %>
 
             <div class="card-product">
-              <%= cl_image_tag booking.equipment.photos.first.key, class: "m-1" %>
+              <% if booking.equipment.photos %>
+                <%= cl_image_tag booking.equipment.photos.first.key, class: "m-1" %>
+              <% end %>
                 <div class="card-product-infos">
                   <div class="main">
                     <p><strong>Rental date:</strong> <%= booking.date %></p>
