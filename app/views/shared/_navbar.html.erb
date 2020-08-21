@@ -63,6 +63,7 @@
               <%= f.button :submit, "Log in", class: "w-100" %>
             </div>
           <% end %>
+          <%= link_to "Sign up","#", class: "nav-link my-1 dark-text", data: { toggle: "modal", target: "#signupModal" } %>
         </div>
       </div>
     </div>
@@ -72,7 +73,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5>Sing into your account here.</h5>
+          <h5>Sign into your account here.</h5>
         </div>
         <div class="modal-body">
           <%= simple_form_for(User.new, as: :user, url: registration_path(:user)) do |f| %>
@@ -109,5 +110,5 @@
         </div>
       </div>
     </div>
-  </div>    
+  </div>
 <% end %>

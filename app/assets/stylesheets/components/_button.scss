@@ -1,4 +1,13 @@
 .btn {
   color: $white;
   background-color: $green;
+  color: #F5F3F5;
+  text-decoration: none;
+}
+
+.dark-text {
+  color: black !important;
+  &:hover {
+    color: $green !important;
+  }
 }
