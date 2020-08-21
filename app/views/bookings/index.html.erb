@@ -47,8 +47,8 @@
                     <p><strong>Equipment:</strong> <%= request.equipment.name%></p>
                     <p><strong>Requested by:</strong> <%= request.user.first_name %></p>
                   </div>
-                  <%= link_to "Accept", booking_path(request, request.status = "in progress") , method: 'patch'%>
-                  <%= link_to "Decline", booking_path(request, request.status = "declined") , method: 'patch'%>
+                  <%= link_to "Accept", booking_path(request, request.status = "in progress") , method: 'patch', class: "m-1" %>
+                  <%= link_to "Decline", booking_path(request, request.status = "declined") , method: 'patch', class: "m-1" %>
                 </div>
               </div>
             <% end %>
