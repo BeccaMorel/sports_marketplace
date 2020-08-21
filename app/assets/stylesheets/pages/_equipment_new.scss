@@ -6,17 +6,8 @@
     border-radius: 12px;
 }
 
-.btn {
-  color: white;
-  font-weight: bold;
-  &:hover {
-    background-color: rgb(1, 134, 52);
-    color: white;
-  }
-}
-
 #file-upload-button {
-  background-color: rgba(0, 159, 61, 1);
+  background-color: $green;
 }
 
 .photo-upload {
@@ -30,7 +21,7 @@
   }
   .photo-upload::before {
     content: 'Add';
-    background-color: rgba(0, 159, 61, 1);
+    background-color: $green;
     color: white;
     font-weight: bold;
     display: inline-block;
