@@ -3,6 +3,10 @@
   background-color: $green;
   color: #F5F3F5;
   text-decoration: none;
+  &:hover {
+    opacity: 0.7;
+    color: $white;
+  }
 }
 
 .dark-text {
