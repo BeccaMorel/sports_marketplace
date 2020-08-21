@@ -18,14 +18,16 @@
               </div>
             <% end %>
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
+          <% if @equipment.photos.attached? && @equipment.photos.length > 1%>
+        <a class="carousel-control-prev" href="#carousel-<%= @equipment.id %>" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel-<%= @equipment.id %>" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+        <% end %>
         </div>
       </div>
 
@@ -74,7 +76,7 @@
         </div>
       </div>
 
-      <div class="booking border p-3 my-3 col-12 col-md-6">
+      <div class="booking p-3 my-3 col-12 col-md-6">
         <%= simple_form_for [@equipment, Booking.new] do |f| %>
           <%= date = f.input :date, as: :date %>
           <%= period = f.input :days %>
@@ -82,7 +84,7 @@
           <%if Booking.where(date: date, equipment_id: @equipment.id) && @equipment.booked == true %>
             <%= f.label "*This equipment is unavailable now*" %>
           <% else %>
-            <%= f.submit "Book now!", class: "btn border" %>
+            <%= f.submit "Book now!", class: "btn" %>
           <%end%>
         <% end %>
       </div>

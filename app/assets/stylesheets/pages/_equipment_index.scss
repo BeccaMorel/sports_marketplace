@@ -23,8 +23,35 @@ h1 {
 .equip-card-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px;
-  width: 50%;
+  grid-gap: 12px;
+  width: 60%;
+}
+
+// Smallest device
+@media (min-width: 100px) {
+  .equip-card-container {
+    grid-template-columns: 1fr;
+    grid-gap: 12px;
+    width: 50%;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .equip-card-container {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 12px;
+    width: 50%;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .equip-card-container {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 12px;
+    width: 60%;
+  }
 }
 
 .search button {

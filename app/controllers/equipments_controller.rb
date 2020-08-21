@@ -1,5 +1,4 @@
 class EquipmentsController < ApplicationController
-
   def index
     if params[:search]
       @equipments = Equipment.algolia_search(params[:search])
@@ -11,6 +10,7 @@ class EquipmentsController < ApplicationController
     else
       @equipments = policy_scope(Equipment).order(:created_at)
     end
+
 
     @users = User.geocoded # returns equipments with coordinates
 

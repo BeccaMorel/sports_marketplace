@@ -1,2 +1,5 @@
-<h2><%= user.first_name %></h2>
-<p><%= user.address %></p>
+<% @equipments.each do |equipment| %>
+  <% if equipment.user_id = user.id %>
+    <%= equipment.name %>
+  <% end %>
+<% end %>
