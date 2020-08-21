@@ -14,3 +14,12 @@ h1 {
 .carousel-center {
   margin: auto;
 }
+
+.white-card {
+  background: $white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.orange-row {
+  max-height: 350px;
+}
