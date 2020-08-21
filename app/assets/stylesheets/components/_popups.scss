@@ -1,7 +1,7 @@
 .modal-content {
   border-radius: 20px;
   h5 {
-    color: #59114D;
+    color: $purple;
   }
   .modal-header {
       justify-content: center;
@@ -12,7 +12,7 @@
     border-top: 0px;
     padding: 0px;
       .btn {
-        background-color:rgba(0, 159, 61, 1);
+        background-color: $green;
         color: white;
         font-weight: bold;
         border: 0px;
