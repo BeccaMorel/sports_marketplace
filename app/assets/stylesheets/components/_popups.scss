@@ -1,5 +1,8 @@
 .modal-content {
   border-radius: 20px;
+  h5 {
+    color: #59114D;
+  }
   .modal-header {
       justify-content: center;
       border-bottom: 0px;
@@ -26,3 +29,8 @@
 #user_address, #user_password_confirmation {
   border-radius: 12px;
 } 
+
+
+// input[type='checkbox'][value='1']#user_remember_me {
+//   background-color: rgba(0, 159, 61, 1);
+// }

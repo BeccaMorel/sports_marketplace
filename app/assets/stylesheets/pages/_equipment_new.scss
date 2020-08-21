@@ -1,0 +1,48 @@
+.card-new {
+  border-radius: 20px;
+}
+
+#equipment_name, #equipment_description, #equipment_price, .btn {
+    border-radius: 12px;
+}
+
+.btn {
+  color: white;
+  font-weight: bold;
+  &:hover {
+    background-color: rgb(1, 134, 52);
+    color: white;
+  }
+}
+
+#file-upload-button {
+  background-color: rgba(0, 159, 61, 1);
+}
+
+.photo-upload {
+    color: transparent;
+    position: relative;
+    color: black;
+    
+  }
+  .photo-upload::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .photo-upload::before {
+    content: 'Add';
+    background-color: rgba(0, 159, 61, 1);
+    color: white;
+    font-weight: bold;
+    display: inline-block;
+    // position: absolute;
+    // right: 5px;
+    // border: 1px solid $f-nav-green;
+    border-radius: 12px;
+    padding: 6px 30px;
+    margin-top: 3px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
