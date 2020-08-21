@@ -19,18 +19,15 @@
   // height: fit-content;
   justify-content: center;
   border-radius: 15px;
-  text-decoration: none;
   grid-column: span 1;
 
 }
 
 .equip-card:hover {
   opacity: .75;
-  background-color: #E98A15;
-  text-decoration: none !important;
+  background-color: $orangy;
   a {
     text-decoration: none;
-
   }
 }
 
@@ -38,12 +35,8 @@
   text-align: center;
   line-height: 20px;
   color: black;
-  text-decoration: none;
 }
 
-.equip-text:hover{
-  text-decoration: none;
-}
 
 .card-new {
   padding: 30px 20px;

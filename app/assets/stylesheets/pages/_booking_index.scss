@@ -1,9 +1,9 @@
-// .message {
-//   background-color:;
-//   padding: 2px 4px;
-// }
+.purple-row {
+  border: 2px solid $purple;
+  margin: 8px;
+}
 
-li > a {
+a {
   color: $green;
   &:hover {
     text-decoration: none;
@@ -14,4 +14,36 @@ li > a {
 
 h2 {
   color: $dark-green;
+}
+
+.card-product {
+  overflow: hidden;
+  height: 120px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.card-product img {
+  height: 100%;
+  width: 120px;
+  object-fit: cover;
+}
+
+.card-product p {
+  font-size: 16px;
+  opacity: 0.8;
+  line-height: 1.4;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-product .card-product-infos {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
 }

@@ -47,11 +47,16 @@ class BookingsController < ApplicationController
     @booking.equipment = @equipment
     @booking.user = current_user
     authorize(@booking)
-    if @booking.save
-      redirect_to equipment_path(@equipment)
-      flash[:notice] = "Request made to #{User.find(@equipment.user_id).first_name}! Go to Dashboard to see status"
+    unless @bookings.find{|book| book.equipment_id = params[:equipment_id] && book.user_id = @booking.user.id && book.status != "canceled"}
+      if @booking.save
+        redirect_to equipment_path(@equipment)
+        flash[:notice] = "Request made to #{User.find(@equipment.user_id).first_name}! Go to Dashboard to see status"
+      else
+        flash.now[:notice] = "Request could not be made. Please try again"
+        render 'equipments/show'
+      end
     else
-      flash.now[:notice] = "Request could not be made or has already been done"
+      flash.now[:notice] = "Request already made. Go to Dashboard to see status"
       render 'equipments/show'
     end
   end
@@ -71,4 +76,10 @@ class BookingsController < ApplicationController
   def booking_params
     params.require(:booking).permit(:date)
   end
+  def authorized_booking
+    @equipment.bookings.find {|book| 
+      book.equipment_id = params[:equipment_id] && 
+      book.user_id = @booking.user.id && book.status != "canceled"}
+  end
+
 end
