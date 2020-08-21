@@ -42,7 +42,7 @@
                 <% end %>
                 <div class="card-product-infos">
                   <div class="group-item">
-                    <p><strong>Rental date:</strong> <%=  request.date %></p>
+                    <p><strong>Rental date:</strong> <%=  request.date.to_formatted_s(:long_ordinal) %></p>
                     <p><strong>--<%= request.status %>--</strong></p>
                     <p><strong>Equipment:</strong> <%= request.equipment.name%></p>
                     <p><strong>Requested by:</strong> <%= request.user.first_name %></p>
@@ -68,7 +68,7 @@
                 <% end %>
                 <div class="card-product-infos">
                   <div class="group-item">
-                    <p><strong>Rental date:</strong> <%=  request.date %></p>
+                    <p><strong>Rental date:</strong> <%=  request.date.to_formatted_s(:long_ordinal) %></p>
                     <p><strong>--<%= request.status %>--</strong></p>
                     <p><strong>Equipment:</strong> <%= request.equipment.name%></p>
                     <p><strong>Requested by:</strong> <%= request.user.first_name %></p>
@@ -98,7 +98,7 @@
               <% end %>
                 <div class="card-product-infos">
                   <div class="main">
-                    <p><strong>Rental date:</strong> <%= booking.date %></p>
+                    <p><strong>Rental date:</strong> <%= booking.date.to_formatted_s(:long_ordinal) %></p>
                     <p class="bigger-text"><strong>--<%= booking.status %>--</strong></p>
                     <p><strong>Equipment:</strong> <%= booking.equipment.name%>, owned by <%= User.find(booking.equipment.user_id).first_name %> <%= User.find(booking.equipment.user_id).last_name %></p>
                     <%= link_to "Cancel Booking", booking_path(booking, booking.status = "canceled") , method: 'patch', data: { confirm: "Are you sure you want to cancel the booking ?" } %><br>
