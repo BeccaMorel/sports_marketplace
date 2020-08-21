@@ -21,7 +21,7 @@ class BookingsController < ApplicationController
     @requests_on = []
     begin
       @equipments.each do |item|
-        Booking.where( equipment_id: item.id, status: "in progress" ).each do |booking|
+        Booking.where( equipment_id: item.id, status: "accepted" ).each do |booking|
           @requests_on << booking
         end
       end
