@@ -7,11 +7,13 @@
   .modal-footer {
     justify-content: center; 
     border-top: 0px;
+    padding: 0px;
       .btn {
         background-color:rgba(0, 159, 61, 1);
         color: white;
         font-weight: bold;
-        padding: 7px 212px;
+        border: 0px;
+        margin: 0px;
         border-radius: 12px;
         &:hover {
           background-color: rgb(1, 134, 52);
