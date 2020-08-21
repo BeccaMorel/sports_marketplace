@@ -1,5 +1,9 @@
-<% @equipments.each do |equipment| %>
-  <% if equipment.user_id == user.id %>
-    <%= equipment.name %>
+<div class="orange-border">
+  <% @equipments.each do |equipment| %>
+    <ul class="list-group list-group-flush">
+      <% if equipment.user_id == user.id %>
+        <li class="list-group-item text-size"><%= link_to equipment.name, equipment_path(equipment) %></li>
+      <% end %>
+    </ul>
   <% end %>
-<% end %>
+</div>
