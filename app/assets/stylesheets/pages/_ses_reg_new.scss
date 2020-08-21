@@ -1,0 +1,26 @@
+.a-tags {
+  text-align: center;
+  margin-top: 14px;
+  a {
+  color: black;
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+
+h2 {
+  color: $purple;
+}
+
+#login {
+  position: relative;
+  bottom: 5px;
+}
+#signin {
+  position: relative;
+  bottom: 14px;
+}
