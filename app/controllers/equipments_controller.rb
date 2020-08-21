@@ -1,4 +1,6 @@
 class EquipmentsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [ :index ]
+  
   def index
     if params[:search]
       @equipments = Equipment.algolia_search(params[:search])
