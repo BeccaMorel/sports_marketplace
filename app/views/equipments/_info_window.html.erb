@@ -1,5 +1,5 @@
 <% @equipments.each do |equipment| %>
-  <% if equipment.user_id = user.id %>
+  <% if equipment.user_id == user.id %>
     <%= equipment.name %>
   <% end %>
 <% end %>
