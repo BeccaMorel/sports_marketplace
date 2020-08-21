@@ -1,81 +1,102 @@
 <div class="container">
 
-  <h1>My Dashboard</h1>
+  <h1 class="text-center my-3">My Dashboard</h1>
 
-  <h2>My Equipment</h2>
-  <% if @equipments.empty? %>
-    <p class="message">-- <%= @message %> --</p>
-  <% else %>
-  <ul class="list-group list-group-flush">
-    <% @equipments.each do |equipment| %>
-      <li class="list-group-item"><%= link_to "#{equipment.name}", equipment_path(equipment.id) %> - <%= equipment.booked ? "unavailable" : "available" %></li>
-    <% end %>
-  </ul>
-  <% end %>
+  <div class="row my-3 p-2">
 
-  <h2>My Rental Requests</h2>
-  <h3>Waiting for answer</h3>
-    <% if @requests_wait.empty? %>
-      <p class="message">-- <%= @message %> --</p>
-    <% else %>
-      <ul class="list-group list-group-flush">
-      <% @requests_wait.each do |request| %>
-      <li class="list-group-item">
-        On <%=  request.date %><br>
-        --<%= request.status %>--<br>
-        Equipment: <%= request.equipment.name%><br>
-        Requested by: <%= request.user.first_name %>
-      </li>
-      <%= link_to "Accept", booking_path(request, request.status = "in progress") , method: 'patch'%>
-      <%= link_to "Decline", booking_path(request, request.status = "declined") , method: 'patch'%>
-    <% end %>
-    </ul>
-    <% end %>
-  <h3>On Going</h3>
-    <% if @requests_on.empty? %>
-      <p class="message">-- <%= @message %> --</p>
-    <% else %>
-      <ul class="list-group list-group-flush">
-      <% @requests_on.each do |request| %>
-      <li class="list-group-item">
-        On <%=  request.date %><br>
-        --<%= request.status %>--<br>
-        Equipment: <%= request.equipment.name%><br>
-        Requested by: <%= request.user.first_name %>
-      </li>
-      <%= link_to "Cancel", booking_path(request, request.status = "declined") , method: 'patch'%>
-      <% end %>
-      </ul>
-    <% end %>
-
-  <h2>My Bookings</h2>
-  <% if @bookings.empty? %>
-    <p class="message">-- <%= @message %> --</p>
-  <% else %>
-    <ul class="list-group list-group-flush">
-    <% @bookings.each do |booking| %>
-      <li class="list-group-item">
-       On <%= booking.date %><br>
-       --<%= booking.status %>--<br>
-       Equipment: <%= booking.equipment.name%><br>
-       Owner: <%= User.find(booking.equipment.user_id).first_name %>
-        <%= User.find(booking.equipment.user_id).last_name %><br>
-      <%= link_to "Cancel Booking", booking_path(booking, booking.status = "canceled") , method: 'patch', data: { confirm: "Are you sure you want to cancel the booking ?" } %><br>
-      <% review = booking.equipment.reviews.find{|review| review.user_id == current_user.id && review.booking_id == booking.id } %>
-      <% if review.nil? %>
-        <%= link_to "Add a review", new_booking_review_path(booking.id) %>
+    <div class="my-equipment col-12">
+      <h2>My Equipment</h2>
+      <% if @equipments.empty? %>
+        <p class="message">-- <%= @message %> --</p>
       <% else %>
-        <%= "Review: "%>
-        <% (review.rating).times do |r| %>
-          <i class="fas fa-star text-primary"></i>
+      <ul class="list-group list-group-flush">
+        <% @equipments.each do |equipment| %>
+          <li class="list-group-item"><%= link_to "#{equipment.name}", equipment_path(equipment.id) %> - <%= equipment.booked ? "unavailable" : "available" %></li>
         <% end %>
-        <% (5 - (review.rating)).times do |r| %>
-          <i class="far fa-star text-primary"></i>
-        <% end %>
-      <% end %>
-      </li>
       </ul>
-    <% end %>
-  <% end %>
+      <% end %>
+    </div>
+  </div>
 
+  <div class="row rentals my-3 p-2">
+
+    <h2 class="col-12">My Rental Requests</h2>
+
+        <div class="waiting col-12 col-md-6">
+          <h3>Waiting for answer</h3>
+            <% if @requests_wait.empty? %>
+              <p class="message">-- <%= @message %> --</p>
+            <% else %>
+              <ul class="list-group list-group-flush">
+              <% @requests_wait.each do |request| %>
+                <li class="list-group-item">
+                  On <%=  request.date %><br>
+                  --<%= request.status %>--<br>
+                  Equipment: <%= request.equipment.name%><br>
+                  Requested by: <%= request.user.first_name %>
+                </li>
+                <%= link_to "Accept", booking_path(request, request.status = "in progress") , method: 'patch'%>
+                <%= link_to "Decline", booking_path(request, request.status = "declined") , method: 'patch'%>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+
+        <div class="on-going col-12 col-md-6">
+          <h3>On Going</h3>
+            <% if @requests_on.empty? %>
+              <p class="message">-- <%= @message %> --</p>
+            <% else %>
+              <ul class="list-group list-group-flush">
+              <% @requests_on.each do |request| %>
+              <li class="list-group-item">
+                On <%=  request.date %><br>
+                --<%= request.status %>--<br>
+                Equipment: <%= request.equipment.name%><br>
+                Requested by: <%= request.user.first_name %>
+              </li>
+              <%= link_to "Cancel", booking_path(request, request.status = "declined") , method: 'patch'%>
+              <% end %>
+              </ul>
+            <% end %>
+          </div>
+
+      </div>
+
+    <div class="row bookings my-3 p-2">
+
+      <div class="col-12">
+        <h2>My Bookings</h2>
+        <% if @bookings.empty? %>
+          <p class="message">-- <%= @message %> --</p>
+        <% else %>
+          <ul class="list-group list-group-flush">
+          <% @bookings.each do |booking| %>
+            <li class="list-group-item">
+             On <%= booking.date %><br>
+             --<%= booking.status %>--<br>
+             Equipment: <%= booking.equipment.name%><br>
+             Owner: <%= User.find(booking.equipment.user_id).first_name %>
+              <%= User.find(booking.equipment.user_id).last_name %><br>
+            <%= link_to "Cancel Booking", booking_path(booking, booking.status = "canceled") , method: 'patch', data: { confirm: "Are you sure you want to cancel the booking ?" } %><br>
+            <% review = booking.equipment.reviews.find{|review| review.user_id == current_user.id && review.booking_id == booking.id } %>
+            <% if review.nil? %>
+              <%= link_to "Add a review", new_booking_review_path(booking.id) %>
+            <% else %>
+              <%= "Review: "%>
+              <% (review.rating).times do |r| %>
+                <i class="fas fa-star text-primary"></i>
+              <% end %>
+              <% (5 - (review.rating)).times do |r| %>
+                <i class="far fa-star text-primary"></i>
+              <% end %>
+            <% end %>
+            </li>
+            </ul>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
 </div>
