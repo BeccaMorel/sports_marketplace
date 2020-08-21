@@ -4,7 +4,9 @@
     <% if user_signed_in? %>
       <%= link_to "Take a look", equipments_path, class: "nav-link btn btn-lg" %>
     <% else %>
-      <%= link_to "Take a look", "#", class: "nav-link btn btn-lg", data: { toggle: "modal", target: "#loginModal" } %>
+      <%= link_to "Take a look", equipments_path, class: "nav-link btn btn-lg" %>
     <% end %>
   </div>
 </div>
+
+<%# , data: { toggle: "modal", target: "#loginModal" } %>

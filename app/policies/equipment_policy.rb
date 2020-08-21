@@ -1,4 +1,4 @@
-class EquipmentPolicy < ApplicationPolicy
+class EquipmentPolicy < ApplicationPolicy 
   def show?
     # should return true or false depending on if the user can perform this action for this equipment
     return true
