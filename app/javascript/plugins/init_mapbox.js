@@ -5,13 +5,24 @@ const initMapbox = () => {
   const mapElement = document.getElementById('map');
 
   mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
-  const map = new mapboxgl.Map({
+
+  const userLong = mapElement.dataset.userLongitude;
+  const userLat = mapElement.dataset.userLatitude;
+
+  const isUserLocationPresent = (userLong && userLat);
+
+  const mapAttributes = {
     container: "map",
-    style: 'mapbox://styles/mapbox/streets-v10',
-    center: [mapElement.dataset.userLongitude, mapElement.dataset.userLatitude],
-    zoom: 12,
-    attributionControl: false,
-  });
+    style: 'mapbox://styles/mapbox/streets-v10'
+  }
+
+  if (isUserLocationPresent) {
+    mapAttributes.center = [userLong, userLat];
+    mapAttributes.attributionControl = false;
+    mapAttributes.zoom = 12
+  }
+
+  const map = new mapboxgl.Map(mapAttributes);
 
   const markers = JSON.parse(mapElement.dataset.markers);
 
@@ -24,7 +35,9 @@ const initMapbox = () => {
       .addTo(map);
   });
 
-  // fitMapToMarkers(map, markers);
+  if (!isUserLocationPresent) {
+    fitMapToMarkers(map, markers);
+  }
 
   map.addControl(new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
@@ -32,12 +45,10 @@ const initMapbox = () => {
   }));
 }
 
-// Logic to fit all the pins on the map when opened
-
-// const fitMapToMarkers = (map, markers) => {
-//   const bounds = new mapboxgl.LngLatBounds();
-//   markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
-//   map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
-// };
+const fitMapToMarkers = (map, markers) => {
+  const bounds = new mapboxgl.LngLatBounds();
+  markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
+  map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
+};
 
 export { initMapbox };
