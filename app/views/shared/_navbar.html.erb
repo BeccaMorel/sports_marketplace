@@ -10,7 +10,7 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to "All our Equipment",equipments_path , class: "nav-link white-text" %>
+          <%= link_to "All Equipment",equipments_path , class: "nav-link white-text" %>
         </li>
 
       <li class="nav-item dropdown">
@@ -45,7 +45,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5>Login to book your equipment!</h5>
+          <h5>Login to the equipment!</h5>
         </div>
         <div class="modal-body">
           <%= simple_form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
@@ -73,7 +73,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5>Sign into your account here.</h5>
+          <h5>Create an account to see our equipment</h5>
         </div>
         <div class="modal-body">
           <%= simple_form_for(User.new, as: :user, url: registration_path(:user)) do |f| %>
