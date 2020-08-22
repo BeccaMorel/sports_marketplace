@@ -1,7 +1,19 @@
 <div class="container">
-  <div class="title m-4 text-center">
-    <h1><%= @equipment.name.capitalize %></h1>
-  </div>
+  <h1 class="title m-4 text-center">
+    <%= @equipment.name.capitalize %>
+
+    <% if policy(@equipment).destroy? %>
+      <%= link_to equipment_path(@equipment), method: :delete, data: { confirm: "Are you sure you want to delete #{@equipment.name}?" } do %>
+        <i class="far fa-trash-alt smaller-icon"></i>
+      <% end %>
+    <% end %>
+
+    <% if policy(@equipment).edit? %>
+      <%= link_to edit_equipment_path(@equipment) do %>
+        <i class="far fa-edit smaller-icon"></i>
+      <% end %>
+    <% end %>
+  </h1>
 
   <div class="row">
 
@@ -36,17 +48,6 @@
         <p class="border-bottom py-2"><strong class="title-color">Description:</strong> <%= @equipment.description %></p>
         <p class="border-bottom py-2"><strong class="title-color">Price:</strong> <%= @equipment.price %>CAD /day</p>
         <p class="border-bottom py-2"><strong class="title-color">Owner:</strong> <%= User.find(@equipment.user_id).first_name %></p>
-
-        <% if policy(@equipment).edit? %>
-          <p><%= link_to "Edit", edit_equipment_path(@equipment) %></p>
-        <% end %>
-
-        <% if policy(@equipment).destroy? %>
-          <p><%= link_to "Delete",
-            equipment_path(@equipment),
-            method: :delete,
-            data: { confirm: "Are you sure you want to delete #{@equipment.name}?" } %></p>
-        <% end %>
       </div>
       <div class="description mx-3 my-5">
         <p class="title-color"><strong>Reviews:</strong></p>
