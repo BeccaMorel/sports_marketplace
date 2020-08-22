@@ -1,5 +1,4 @@
 .purple-row {
-  border: 2px solid $purple;
   margin: 8px;
 }
 
@@ -12,23 +11,34 @@ a {
   }
 }
 
+.message-purple {
+  color: $purple !important;
+}
+
+.message-orange {
+  color: $orangy !important;
+}
+
 h2 {
   color: $dark-green;
+  font-weight: bold;
 }
 
 .card-product {
   overflow: hidden;
-  height: 150px;
+  height: 160px;
   background: $white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border: 4px solid $purple;
+  border-radius: 10px;
   display: flex;
   align-items: center;
-  margin: 8px 0;
+  margin: 16px 0;
 }
 
 .card-product img {
   height: 100%;
   width: 120px;
+  border-radius: 4px 0 0 4px;
   object-fit: cover;
 }
 
@@ -44,6 +54,6 @@ h2 {
   padding: 16px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   position: relative;
 }

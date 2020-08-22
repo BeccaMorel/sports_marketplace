@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   def index
-    @message = "None"
+    @message = "None yet"
     begin
       @equipments_all = policy_scope(Equipment)
       @equipments = @equipments_all.select{|equipment|equipment.user_id == current_user.id }
@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
     @requests_wait = []
     begin
       @equipments.each do |item|
-        Booking.where( equipment_id: item.id, status: "pending" ).each do |booking|
+        Booking.where(equipment_id: item.id, status: "pending").each do |booking|
           @requests_wait << booking
         end
       end
@@ -21,7 +21,7 @@ class BookingsController < ApplicationController
     @requests_on = []
     begin
       @equipments.each do |item|
-        Booking.where( equipment_id: item.id, status: "accepted" ).each do |booking|
+        Booking.where(equipment_id: item.id, status: "accepted").each do |booking|
           @requests_on << booking
         end
       end
@@ -56,7 +56,7 @@ class BookingsController < ApplicationController
         render 'equipments/show'
       end
     else
-      flash.now[:notice] = "Request already made. Go to Dashboard to see status"
+      flash.now[:notice] = "#{@equipment.name.capitalize} already booked at this date."
       render 'equipments/show'
     end
   end
@@ -64,7 +64,7 @@ class BookingsController < ApplicationController
   def update
     @booking = Booking.find(params[:id])
     status = params[:format]
-    booked = status.match? "in progress"
+    booked = status.match? "accepted"
     authorize(@booking)
     @booking.update(status: status)
     @booking.equipment.update(booked: booked)
@@ -77,8 +77,8 @@ class BookingsController < ApplicationController
     params.require(:booking).permit(:date)
   end
   def authorized_booking
-    @equipment.bookings.find {|book| 
-      book.equipment_id = params[:equipment_id] && 
+    @equipment.bookings.find {|book|
+      book.equipment_id = params[:equipment_id] &&
       book.user_id = @booking.user.id && book.status != "canceled"}
   end
 
