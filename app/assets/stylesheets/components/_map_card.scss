@@ -1,0 +1,25 @@
+.card-product-map {
+  overflow: hidden;
+  height: 80px;
+  background: $white;
+  border: 2px solid $orangy;
+  display: flex;
+  align-items: center;
+  max-height: 200px;
+}
+
+.card-product-map img {
+  height: 100%;
+  width: 80px;
+  object-fit: cover;
+}
+
+.card-product-map p {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-product-map .card-product-infos-map {
+  padding: 16px;
+}
