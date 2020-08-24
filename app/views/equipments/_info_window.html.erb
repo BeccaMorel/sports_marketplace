@@ -1,9 +1,14 @@
-<div class="orange-border">
-  <% @equipments.each do |equipment| %>
-    <ul class="list-group list-group-flush">
-      <% if equipment.user_id == user.id %>
-        <li class="list-group-item text-size"><%= link_to equipment.name, equipment_path(equipment) %></li>
+<% @equipments.each do |equipment| %>
+  <% if equipment.user_id == user.id %>
+    <div class="card-product-map my-1">
+      <% if equipment.photos.first %>
+        <%= cl_image_tag equipment.photos.first.key, class: "m-1" %>
       <% end %>
-    </ul>
+      <div class="card-product-infos-map flex-fill">
+        <% if equipment.user_id == user.id %>
+          <p><%= link_to equipment.name, equipment_path(equipment) %></p>
+        <% end %>
+      </div>
+    </div>
   <% end %>
-</div>
+<% end %>

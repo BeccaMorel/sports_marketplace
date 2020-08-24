@@ -9,6 +9,19 @@
   }
 }
 
+.btn-red {
+  color: $white;
+  background-color: red;
+  border-radius: 12px;
+  color: #F5F3F5;
+  text-decoration: none;
+  font-weight: bold;
+  &:hover {
+    background-color: rgb(200, 30, 30);
+    color: $white;
+  }
+}
+
 .dark-text {
   color: black !important;
   &:hover {

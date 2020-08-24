@@ -1,12 +1,14 @@
 <div class="container">
-  <h1 class="title m-4 text-center">
-    <%= @equipment.name.capitalize %>
+  
+  <h1 class="title my-5 text-center">
+    <strong><%= @equipment.name.capitalize %></strong>
 
     <% if policy(@equipment).destroy? %>
       <%= link_to equipment_path(@equipment), method: :delete, data: { confirm: "Are you sure you want to delete #{@equipment.name}?" } do %>
         <i class="far fa-trash-alt smaller-icon"></i>
       <% end %>
     <% end %>
+
 
     <% if policy(@equipment).edit? %>
       <%= link_to edit_equipment_path(@equipment) do %>
