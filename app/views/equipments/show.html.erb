@@ -3,35 +3,35 @@
     <h1><%= @equipment.name.capitalize %></h1>
   </div>
 
-  <div class="row">
+  <div class="row justify-content-around">
 
-    <div class="col-12 col-md-6">
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <% @equipment.photos.each do |photo| %>
-            <% if photo == @equipment.photos.first %>
-              <div class="carousel-item active">
-            <% else %>
-              <div class="carousel-item">
+    <div class="white-card p-3 my-3">
+      <div class="flex-grow-1 d-flex flex-column">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <% @equipment.photos.each do |photo| %>
+              <% if photo == @equipment.photos.first %>
+                <div class="carousel-item active">
+              <% else %>
+                <div class="carousel-item">
+              <% end %>
+              <%= cl_image_tag photo.key, height: 300, crop: :fill, class: "d-block carousel-center" %>
+            </div>
             <% end %>
-            <%= cl_image_tag photo.key, height: 300, crop: :fill, class: "d-block carousel-center" %>
           </div>
+          <% if @equipment.photos.attached? && @equipment.photos.length > 1%>
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
           <% end %>
         </div>
-        <% if @equipment.photos.attached? && @equipment.photos.length > 1%>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-        <% end %>
       </div>
-    </div>
 
-    <div class="col-12 col-md-6">
       <div class="description mx-3 my-3">
         <p class="border-bottom py-2"><strong class="title-color">Description:</strong> <%= @equipment.description %></p>
         <p class="border-bottom py-2"><strong class="title-color">Price:</strong> <%= @equipment.price %>CAD /day</p>
@@ -48,35 +48,36 @@
             data: { confirm: "Are you sure you want to delete #{@equipment.name}?" } %></p>
         <% end %>
       </div>
-      <div class="description mx-3 my-5">
-        <p class="title-color"><strong>Reviews:</strong></p>
-        <% @reviews = @equipment.reviews %>
-        <% if @reviews.empty? %>
-          <%= "-- None --"%>
-        <% else %>
-          <% counter = 1 %>
 
-          <% @reviews.each do |review|%>
-            <ul>
-              <li>
-                <p><strong>N°<%= counter%>:</strong> <%= review.title %>
-                  <% (review.rating).times do |r| %>
-                    <i class="fas fa-star text-primary"></i>
-                  <% end %>
-                  <% (5 - (review.rating)).times do |r| %>
-                    <i class="far fa-star text-primary"></i>
-                  <% end %>
-                  </p>
-                <p><strong>Content:</strong> <%= review.description %></p>
-              </li>
-            </ul>
-            <% counter += 1 %>
+        <div class="description mx-3 my-5">
+          <p class="title-color"><strong>Reviews:</strong></p>
+          <% @reviews = @equipment.reviews %>
+          <% if @reviews.empty? %>
+            <%= "-- None --"%>
+          <% else %>
+            <% counter = 1 %>
+
+              <ul>
+            <% @reviews.each do |review|%>
+                <li class="box-white">
+                  <p><strong>N°<%= counter%>:</strong> <%= review.title %>
+                    <% (review.rating).times do |r| %>
+                      <i class="fas fa-star text-primary"></i>
+                    <% end %>
+                    <% (5 - (review.rating)).times do |r| %>
+                      <i class="far fa-star text-primary"></i>
+                    <% end %>
+                    </p>
+                  <p><strong>Content:</strong> <%= review.description %></p>
+                </li>
+              </ul>
+              <% counter += 1 %>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
-    </div>
 
-    <div class="orange-row p-3 my-3 col-12 col-md-6">
+    <div class="orange-row p-3 m-3">
       <%= simple_form_for [@equipment, Booking.new] do |f| %>
         <%= date = f.input :date, as: :date %>
         <%= period = f.input :days %>
