@@ -81,7 +81,7 @@
       <%= simple_form_for([@booking, @review]) do |f| %>
         <%= f.input :title %>
         <%= f.input :description %>
-        <%= f.collection_radio_buttons :rating, [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5']], :first, :last %>
+        <%= f.input :rating, as: :radio_buttons, collection: [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5']] %>
         <%= f.submit "Add a review!", class: "btn d-flex flex-column my-2" %>
       <% end %>
     </div>

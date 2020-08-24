@@ -10,7 +10,7 @@
           <%= f.input :description %>
           <%= f.input :photos, as: :file, input_html: { multiple: true,  class: "photo-upload" } %>
           <%= f.input :price %>
-          <%= f.submit %>
+          <%= f.submit "Update", class: "btn" %>
         <% end %>
 
       <div>
