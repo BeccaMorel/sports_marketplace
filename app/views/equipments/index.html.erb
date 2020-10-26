@@ -10,7 +10,7 @@
   </div>
 
   <div class="cards-map-container">
-    <div class="equip-card-container">
+    <div class="equip-card-container mb-5">
       <% @equipments.each do |equipment| %>
       <%= render 'carousel-card', equipment: equipment%>
       <% end %>
@@ -18,7 +18,7 @@
 
     <% if user_signed_in? %>
     <div id="map"
-         style="width: 50%; height: 600px;"
+         style="height: 600px;"
          data-markers="<%= @markers.to_json %>"
          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
          data-user-longitude="<%= current_user.longitude %>"
@@ -26,7 +26,7 @@
     </div>
     <% else %>
       <div id="map"
-         style="width: 50%; height: 600px;"
+         style="height: 600px;"
          data-markers="<%= @markers.to_json %>"
          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>

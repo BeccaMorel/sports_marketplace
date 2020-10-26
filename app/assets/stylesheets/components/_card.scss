@@ -1,28 +1,26 @@
-.photos {
-  border-radius: 15px;
-  width: 150px;
-  // height: 150px;
-  width: 100%;
-}
-
 .photos img {
   width: 100%;
-  height: 140px;
+  height: 150px;
   object-fit: cover;
-  border-radius: 15px 15px 0px 0px;
+  border-radius: 12px 12px 0px 0px;
 }
 
 .equip-card {
-  border: 1px solid #111D13;
+  // border: 1px solid #111D13;
   // height: fit-content;
-  justify-content: center;
-  border-radius: 15px;
+  // justify-content: center;
+  border-radius: 12px;
   grid-column: span 1;
-
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  .d-flex {
+    .card-right-content {
+      color: $dark-green;
+    }
+  }
 }
 
 .equip-card:hover {
-  opacity: .75;
+  opacity: .6;
   background-color: $orangy;
   a {
     text-decoration: none;
@@ -30,7 +28,7 @@
 }
 
 .equip-text {
-  text-align: center;
+  // text-align: center;
   line-height: 20px;
   color: black;
 }
