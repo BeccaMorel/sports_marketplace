@@ -39,9 +39,9 @@
             <% ratings = equipment.reviews.map{|review| review.rating} %>
             <% ratings_count = equipment.reviews.count %>
             <% medium_ratings = ratings.sum.fdiv(ratings.count) %>
-            <i class="fas fa-star text-warning"></i> <%= medium_ratings %> (<%= ratings_count %>)
+            <span><i class="fas fa-star text-warning"></i> <%= medium_ratings %><span class="text-muted"> (<%= ratings_count %>)</span></span>
           <% else %>
-            <i class="far fa-star text-warning"></i> (0)
+            <span class="text-muted"><i class="far fa-star text-warning"></i> (0)</span>
           <% end %>
         </div>
       </div>
