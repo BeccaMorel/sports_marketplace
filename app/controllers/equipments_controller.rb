@@ -1,6 +1,6 @@
 class EquipmentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index ]
-  
+
   def index
     if params[:search]
       @equipments = Equipment.algolia_search(params[:search])
@@ -30,6 +30,9 @@ class EquipmentsController < ApplicationController
     @booking = Booking.new
     @bookings = @equipment.bookings
     authorize(@equipment)
+
+    @other_equipment = Equipment.select { |equipment| equipment.id != @equipment.id }.sample
+    @second_equipment = Equipment.select { |equipment| equipment.id != @equipment.id && equipment.id != @other_equipment.id }.sample
   end
 
   def new
