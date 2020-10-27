@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-show">
 
   <h1 class="title my-5 text-center">
     <strong><%= @equipment.name.capitalize %></strong>
@@ -17,10 +17,10 @@
     <% end %>
   </h1>
 
-  <div class="row content-show">
+  <div class="content-show">
 
-    <div class="white-card m-3">
-      <div class="flex-grow-1 d-flex flex-column">
+    <div class="left-side white-card m-3">
+      <div class="d-flex flex-grow-1 flex-column">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <% @equipment.photos.each do |photo| %>
@@ -104,9 +104,9 @@
                 <div class="carousel-inner">
                   <% @other_equipment.photos.each do |photo| %>
                     <% if photo == @other_equipment.photos.first %>
-                      <div class="carousel-item active">
+                      <div class="carousel-item active photos">
                     <% else %>
-                      <div class="carousel-item">
+                      <div class="carousel-item photos">
                     <% end %>
                     <%= cl_image_tag photo.key, height: 200, crop: :fill, class: "d-block carousel-center" %>
                   </div>
@@ -125,8 +125,18 @@
               </div>
             </div>
             <div class="smaller-card-info">
-              <div class="smaller-equipment-title px-3">
-                <strong><%= @other_equipment.name %></strong>
+              <div class="smaller-equipment-title p-3 text-muted d-flex justify-content-between align-items-center">
+                <h5 class="m-0"><%= @other_equipment.name.capitalize %></h5>
+                <div class="rating d-flex justify-content-end align-items-center">
+                  <% if !@other_equipment.reviews.empty? %>
+                    <% ratings = @other_equipment.reviews.map{|review| review.rating} %>
+                    <% ratings_count = @other_equipment.reviews.count %>
+                    <% medium_ratings = ratings.sum.fdiv(ratings.count) %>
+                    <i class="fas fa-star text-warning"></i> <%= medium_ratings %> (<%= ratings_count %>)
+                  <% else %>
+                    <i class="far fa-star text-warning"></i> (0)
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
@@ -139,9 +149,9 @@
                 <div class="carousel-inner">
                   <% @second_equipment.photos.each do |photo| %>
                     <% if photo == @second_equipment.photos.first %>
-                      <div class="carousel-item active">
+                      <div class="carousel-item active photos">
                     <% else %>
-                      <div class="carousel-item">
+                      <div class="carousel-item photos">
                     <% end %>
                     <%= cl_image_tag photo.key, height: 200, crop: :fill, class: "d-block carousel-center" %>
                   </div>
@@ -160,8 +170,18 @@
               </div>
             </div>
             <div class="smaller-card-info">
-              <div class="smaller-equipment-title px-3">
-                <strong><%= @second_equipment.name %></strong>
+              <div class="smaller-equipment-title p-3 text-muted d-flex justify-content-between align-items-center">
+                <h5 class="m-0"><%= @second_equipment.name.capitalize %></h5>
+                <div class="rating d-flex justify-content-end align-items-center">
+                  <% if !@second_equipment.reviews.empty? %>
+                    <% ratings = @second_equipment.reviews.map{|review| review.rating} %>
+                    <% ratings_count = @second_equipment.reviews.count %>
+                    <% medium_ratings = ratings.sum.fdiv(ratings.count) %>
+                    <i class="fas fa-star text-warning"></i> <%= medium_ratings %> (<%= ratings_count %>)
+                  <% else %>
+                    <i class="far fa-star text-warning"></i> (0)
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
