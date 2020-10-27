@@ -3,7 +3,7 @@
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 40px;
   color: $purple;
 }
 
@@ -18,8 +18,42 @@ h1 {
 .white-card {
   background: $white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 12px;
+  img {
+    border-radius: 12px 12px 0 0;
+  }
+}
+
+.sticky-sidebar {
+  position: sticky;
+  top: 60px;
 }
 
 .orange-row {
   max-height: 350px;
 }
+
+// Smallest device
+@media (min-width: 1px) {
+  .content-show {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (min-width: 600px) {
+  .content-show {
+    flex-direction: row;
+    justify-content: around;
+    align-items: flex-start;
+  }
+}
+
+// // Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) {
+// }
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 1100px) {
+// }
