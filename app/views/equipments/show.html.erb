@@ -1,5 +1,5 @@
-<div class="container">
-  
+<div class="container-show">
+
   <h1 class="title my-5 text-center">
     <strong><%= @equipment.name.capitalize %></strong>
 
@@ -17,10 +17,10 @@
     <% end %>
   </h1>
 
-  <div class="row justify-content-around">
+  <div class="content-show">
 
-    <div class="white-card p-3 my-3">
-      <div class="flex-grow-1 d-flex flex-column">
+    <div class="left-side white-card m-3">
+      <div class="d-flex flex-grow-1 flex-column">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <% @equipment.photos.each do |photo| %>
@@ -29,7 +29,7 @@
               <% else %>
                 <div class="carousel-item">
               <% end %>
-              <%= cl_image_tag photo.key, height: 300, crop: :fill, class: "d-block carousel-center" %>
+              <%= cl_image_tag photo.key, height: 400, crop: :fill, class: "d-block carousel-center image-full" %>
             </div>
             <% end %>
           </div>
@@ -46,17 +46,19 @@
         </div>
       </div>
 
-      <div class="description mx-3 my-3">
-        <p class="border-bottom py-2"><strong class="title-color">Description:</strong> <%= @equipment.description %></p>
-        <p class="border-bottom py-2"><strong class="title-color">Price:</strong> <%= @equipment.price %>CAD /day</p>
-        <p class="border-bottom py-2"><strong class="title-color">Owner:</strong> <%= User.find(@equipment.user_id).first_name %></p>
+      <div class="description p-3">
+      <div class="small-info d-flex justify-content-around">
+        <div class="text-center"><h3 class="border-bottom py-2 title-color"><strong>Owner</strong></h3> <p><%= User.find(@equipment.user_id).first_name %></p></div>
+        <div class="text-center"><h3 class="border-bottom py-2 title-color"><strong>Price</strong></h3> <p><%= @equipment.price %>CAD /day</p></div>
+      </div>
+      <h3 class="border-bottom py-2 mt-5"><strong class="title-color">Description</strong></h3> <p><%= @equipment.description %></p>
       </div>
 
-        <div class="description mx-3 my-5">
-          <p class="title-color"><strong>Reviews:</strong></p>
+        <div class="description p-3 my-5">
+          <h3 class="title-color border-bottom py-2"><strong>Reviews</strong></h3>
           <% @reviews = @equipment.reviews %>
           <% if @reviews.empty? %>
-            <%= "-- None --"%>
+            <%= "-- None yet--"%>
           <% else %>
             <% counter = 1 %>
 
@@ -80,13 +82,113 @@
         </div>
       </div>
 
-    <div class="orange-row p-3 m-3">
-      <%= simple_form_for [@equipment, Booking.new] do |f| %>
-        <%= date = f.input :date, as: :date %>
-        <%= period = f.input :days %>
-        <p>Total price: <span id="total-price"><%= @equipment.price %></span>CAD</p>
-        <%= f.submit "Book now!", class: "btn" %>
-      <% end %>
+    <div class="right-side-show d-flex flex-column sticky-sidebar">
+
+      <div class="orange-row p-4 m-3">
+        <%= simple_form_for [@equipment, Booking.new] do |f| %>
+          <%= date = f.input :date, as: :date %>
+          <%= period = f.input :days %>
+          <p>Total price: <span id="total-price"><%= @equipment.price %></span>CAD</p>
+          <%= f.submit "Book now!", class: "btn" %>
+        <% end %>
+      </div>
+
+      <div class="smaller-equipment-card-container my-3">
+
+        <h4>Other equipments</h4>
+
+        <%= link_to equipment_path(@other_equipment) do%>
+          <div class="equip-card my-3">
+            <div class="flex-grow-1 d-flex flex-column">
+              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <% @other_equipment.photos.each do |photo| %>
+                    <% if photo == @other_equipment.photos.first %>
+                      <div class="carousel-item active photos">
+                    <% else %>
+                      <div class="carousel-item photos">
+                    <% end %>
+                    <%= cl_image_tag photo.key, height: 200, crop: :fill, class: "d-block carousel-center" %>
+                  </div>
+                  <% end %>
+                </div>
+                <% if @other_equipment.photos.attached? && @other_equipment.photos.length > 1%>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+                <% end %>
+              </div>
+            </div>
+            <div class="smaller-card-info">
+              <div class="smaller-equipment-title p-3 text-muted d-flex justify-content-between align-items-center">
+                <h5 class="m-0"><%= @other_equipment.name.capitalize %></h5>
+                <div class="rating d-flex justify-content-end align-items-center">
+                  <% if !@other_equipment.reviews.empty? %>
+                    <% ratings = @other_equipment.reviews.map{|review| review.rating} %>
+                    <% ratings_count = @other_equipment.reviews.count %>
+                    <% medium_ratings = ratings.sum.fdiv(ratings.count) %>
+                    <i class="fas fa-star text-warning"></i> <%= medium_ratings %> (<%= ratings_count %>)
+                  <% else %>
+                    <i class="far fa-star text-warning"></i> (0)
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end%>
+
+        <%= link_to equipment_path(@second_equipment) do%>
+          <div class="equip-card my-3">
+            <div class="flex-grow-1 d-flex flex-column">
+              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <% @second_equipment.photos.each do |photo| %>
+                    <% if photo == @second_equipment.photos.first %>
+                      <div class="carousel-item active photos">
+                    <% else %>
+                      <div class="carousel-item photos">
+                    <% end %>
+                    <%= cl_image_tag photo.key, height: 200, crop: :fill, class: "d-block carousel-center" %>
+                  </div>
+                  <% end %>
+                </div>
+                <% if @second_equipment.photos.attached? && @second_equipment.photos.length > 1%>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+                <% end %>
+              </div>
+            </div>
+            <div class="smaller-card-info">
+              <div class="smaller-equipment-title p-3 text-muted d-flex justify-content-between align-items-center">
+                <h5 class="m-0"><%= @second_equipment.name.capitalize %></h5>
+                <div class="rating d-flex justify-content-end align-items-center">
+                  <% if !@second_equipment.reviews.empty? %>
+                    <% ratings = @second_equipment.reviews.map{|review| review.rating} %>
+                    <% ratings_count = @second_equipment.reviews.count %>
+                    <% medium_ratings = ratings.sum.fdiv(ratings.count) %>
+                    <i class="fas fa-star text-warning"></i> <%= medium_ratings %> (<%= ratings_count %>)
+                  <% else %>
+                    <i class="far fa-star text-warning"></i> (0)
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end%>
+
+      </div>
+
     </div>
 
   </div>
