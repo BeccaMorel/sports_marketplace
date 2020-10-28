@@ -1,101 +1,73 @@
-<div class="container">
+<div class="container d-flex flex-column align-items-center">
 
-<h1 class="text-center mt-5"><strong>My Dashboard</strong></h1>
+  <div class="my-equipment my-4">
 
-  <div class="content-booking d-flex justify-content-around align-items-start">
+    <h2 class="border-bottom text-center my-4 py-2">MY EQUIPMENT</h2>
 
-    <div class="left-row d-flex flex-column mr-3">
+    <% if @equipments.empty? %>
+      <p class="message-purple">-- <%= @message %> --</p>
+    <% else %>
+      <div class="cards d-flex flex-wrap justify-content-center">
 
-      <div class="my-equipment my-3">
+      <% @equipments.each do |equipment| %>
 
-        <h2 class="border-bottom my-3 py-2">My Equipment</h2>
-
-        <% if @equipments.empty? %>
-          <p class="message-purple">-- <%= @message %> --</p>
-        <% else %>
-          <% @equipments.each do |equipment| %>
-
-            <div class="card-product d-flex justify-content-between my-3">
-              <% if equipment.photos.first %>
-                <%= cl_image_tag equipment.photos.first.key %>
-              <% end %>
-              <div class="card-product-infos mx-2">
-                <p><%= link_to "Your #{equipment.name}", equipment_path(equipment.id) %> - <%= equipment.booked ? "A booking coming up" : "Free for renting" %></p>
-              </div>
-
+          <div class="card-product m-3">
+            <% if equipment.photos.first %>
+              <%= cl_image_tag equipment.photos.first.key %>
+            <% end %>
+            <div class="card-product-infos d-flex flex-column justify-content-center align-items-betwen">
+              <h4 class="text-center my-2"><strong><%= link_to equipment.name.capitalize, equipment_path(equipment.id) %></strong> <i class="fas fa-external-link-alt text-sm"></i> <% equipment.booked ? "A booking coming up" : "Free for renting" %></h4>
               <% @requests_wait.each do |request| %>
                 <% if request.equipment == equipment %>
-                  <div class="booking-info f-flex flex-column p-2 m-2">
-                    <p class="text-center"><strong><%= request.user.first_name %></strong> asked to rent your <strong><%= request.equipment.name %></strong> </p>
-                    <p><strong>Date:</strong> <%= request.date.strftime("%B %d, %Y") %></p>
-                    <div class="group-item d-flex justify-content-center">
-                      <%= link_to "Accept", booking_path(request, request.status = "accepted") , method: 'patch', class: "m-1 btn btn-sm" %>
-                      <%= link_to "Decline", booking_path(request, request.status = "declined") , method: 'patch', class: "m-1 btn-red btn-sm" %>
+                  <div class="booking-info f-flex flex-row p-2 m-2">
+                    <div class="text-center my-1"><i class="far fa-bell text-bg text-purple"></i></div>
+                    <div class="d-flex flex-column">
+                      <p><strong><%= request.user.first_name %></strong> asked to rent your <strong><%= request.equipment.name %></strong> </p>
+                      <p><strong><i class="far fa-calendar text-purple"></i></strong> <%= request.date.strftime("%B %d, %Y") %></p>
+                      <div class="group-item d-flex justify-content-center text-center">
+                        <%= link_to "OK!", booking_path(request, request.status = "accepted") , method: 'patch', class: "m-1 btn btn-sm" %>
+                        <%= link_to "Maybe later", booking_path(request, request.status = "declined") , method: 'patch', class: "m-1 px-2 py-1 btn btn-purple btn-sm" %>
+                      </div>
                     </div>
                   </div>
                 <% end %>
               <% end %>
             </div>
+          </div>
 
           <% end %>
-        <% end %>
-
       </div>
+    <% end %>
 
-      <div class="rentals my-3">
+  </div>
 
-        <h2 class="border-bottom my-3 py-2">My Past Rental Requests</h2>
+  <div class="my-bookings my-4">
 
-        <% if @requests_on.empty? %>
-          <p class="message-purple">No previous rentals</p>
-        <% else %>
-          <% @requests_on.each do |request| %>
+    <h2 class="border-bottom text-center my-4 py-2">MY BOOKINGS</h2>
 
-            <div class="card-product">
-              <% if request.equipment.photos %>
-                <%= cl_image_tag request.equipment.photos.first.key %>
-              <% end %>
-              <div class="group-item ml-2">
-                <p><strong>Rental date:</strong> <%= request.date.strftime("%B %d, %Y") %></p>
-                <p><strong>Requested by:</strong> <%= request.user.first_name %></p>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
+    <% if @bookings.empty? %>
+      <p class="message-purple">No bookings yet. Go see our equipment to start renting it!</p>
+    <% else %>
+      <div class="cards d-flex flex-wrap justify-content-center">
+        <% @bookings.each do |booking| %>
 
-      </div>
-
-    </div>
-
-    <div class="right-row my-3">
-
-      <div class="my-bookings my-3">
-
-        <h2 class="border-bottom my-3 py-2">My Bookings</h2>
-
-        <% if @bookings.empty? %>
-          <p class="message-purple">No bookings yet. Go see our equipment to start renting it!</p>
-        <% else %>
-
-          <% @bookings.each do |booking| %>
-
-            <div class="card-product my-3">
-              <% if booking.equipment.photos %>
-                <%= cl_image_tag booking.equipment.photos.first.key %>
-              <% end %>
-              <div class="text-content d-flex justify-content-between">
-                <div class="main mx-3">
-                  <p><strong>Date:</strong> <%= booking.date.strftime("%B %d, %Y") %></p>
-                  <p><strong>Owner:</strong> <%= User.find(booking.equipment.user_id).first_name %> <%= User.find(booking.equipment.user_id).last_name %></p>
-                  <p class="bigger-text"><strong>Booking status: </strong><%= booking.status %></p>
-                  <%= link_to "Cancel", booking_path(booking, booking.status = "canceled") , method: 'patch', class: "my-1 btn-red btn-sm", data: { confirm: "Are you sure you want to cancel the booking ?" } %><br>
-                </div>
-                <div class="reviews mr-3 text-right">
+          <div class="card-product m-3">
+            <% if booking.equipment.photos %>
+              <%= cl_image_tag booking.equipment.photos.first.key %>
+            <% end %>
+            <div class="card-product-infos d-flex flex-column justify-content-center align-items-betwen">
+              <h4 class="text-center my-2"><strong><%= link_to booking.equipment.name.capitalize, equipment_path(booking.equipment.id) %></strong> <i class="fas fa-external-link-alt text-sm"></i></h4>
+              <div class="booking-info f-flex flex-row p-2 m-2">
+                <p><strong><i class="far fa-calendar text-purple"></i></strong> <%= booking.date.strftime("%B %d, %Y") %></p>
+                <p><strong><i class="far fa-user text-purple"></i></strong> <%= User.find(booking.equipment.user_id).first_name %> <%= User.find(booking.equipment.user_id).last_name %></p>
+                <p class="bigger-text"><strong>Booking status: </strong><%= booking.status %></p>
+                <%= link_to "Cancel", booking_path(booking, booking.status = "canceled") , method: 'patch', class: "my-1 btn-red btn-sm", data: { confirm: "Are you sure you want to cancel the booking ?" } %><br>
+                <div class="reviews mt-2 text-left d-flex">
                   <% review = booking.equipment.reviews.find{|review| review.user_id == current_user.id && review.booking_id == booking.id } %>
                   <% if review.nil? %>
                     <%= link_to "Add a review", new_booking_review_path(booking.id) %>
                   <% else %>
-                    <p><strong>Your review:</strong></p>
+                    <p><strong>Your review: </strong></p>
                     <p>
                       <% (review.rating).times do |r| %>
                         <i class="fas fa-star text-primary"></i>
@@ -108,10 +80,56 @@
                 </div>
               </div>
             </div>
-          <% end %>
+          </div>
         <% end %>
-
       </div>
-    </div>
+    <% end %>
+
   </div>
+
+  <div class="rentals my-4">
+
+    <h2 class="border-bottom text-center my-4 py-2">MY PAST RENTALS</h2>
+
+    <% if @requests_on.empty? %>
+      <p class="message-purple">No previous rentals</p>
+    <% else %>
+      <div class="cards d-flex flex-wrap justify-content-center">
+        <% @requests_on.each do |request| %>
+
+          <div class="card-product m-3">
+            <% if request.equipment.photos %>
+              <%= cl_image_tag request.equipment.photos.first.key %>
+            <% end %>
+            <div class="card-product-infos d-flex flex-column justify-content-center align-items-betwen m-2">
+              <h4 class="text-center my-2"><strong><%= link_to request.equipment.name.capitalize, equipment_path(request.equipment.id) %></strong> <i class="fas fa-external-link-alt text-sm"></i></h4>
+              <div class="booking-info f-flex flex-row p-2 m-2">
+                <div class="text-center my-1"><i class="far fa-bell text-bg text-purple"></i></div>
+                <p><strong><%= request.user.first_name %></strong> rented your <strong><%= request.equipment.name %></strong> </p>
+                <p><strong><i class="far fa-calendar text-purple"></i></strong> <%= request.date.strftime("%B %d, %Y") %></p>
+                <div class="reviews mt-2 text-left">
+                  <% review = request.equipment.reviews.find{|review| review.user_id == request.user.id } %>
+                  <% if review.nil? %>
+                    <p>No review from <%= request.user.first_name %> yet</p>
+                  <% else %>
+                    <p><strong>Review received: </strong></p>
+                    <p>
+                      <% (review.rating).times do |r| %>
+                        <i class="fas fa-star text-primary"></i>
+                      <% end %>
+                      <% (5 - (review.rating)).times do |r| %>
+                        <i class="far fa-star text-primary"></i>
+                      <% end %>
+                    </p>
+                  <% end %>
+                </div>
+                </div>
+              </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+
 </div>
