@@ -22,8 +22,8 @@ h2 {
 
 .card-product {
   overflow: hidden;
-  width: 260px;
-  height: 350px;
+  width: 320px;
+  height: 400px;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
   border-radius: 12px;
   .booking-info {
@@ -31,12 +31,11 @@ h2 {
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
   }
   img {
-    height: 350px;
-    width: 260px;
+    height: 400px;
+    width: 320px;
     border-radius: 12px;
     object-fit: cover;
     opacity: 0.3;
-    // transform: rotate(20deg);
     z-index: -10;
     position: absolute;
   }
@@ -54,14 +53,14 @@ h2 {
 }
 
 .card-product img {
-  height: 350px;
-  width: 260px;
-  border-radius: 12px 0 0 12px;
+  height: 400px;
+  width: 320px;
+  border-radius: 12px;
   object-fit: cover;
 }
 
 .card-product p {
-  font-size: 16px;
+  font-size: 18px;
   opacity: 0.8;
   line-height: 1.2;
   color: $black;
@@ -80,10 +79,3 @@ h2 {
 .text-bg {
   font-size: 24px;
 }
-
-// @media (min-width: 992px) {
-//   .content-booking {
-//     padding: 0 2%;
-//     flex-direction: row;
-//   }
-// }

@@ -18,7 +18,7 @@
 
     <% if user_signed_in? %>
     <div id="map"
-         style="height: 600px;"
+         style="height: 100vh;"
          data-markers="<%= @markers.to_json %>"
          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
          data-user-longitude="<%= current_user.longitude %>"
@@ -26,7 +26,7 @@
     </div>
     <% else %>
       <div id="map"
-         style="height: 600px;"
+         style="height: 100vh;"
          data-markers="<%= @markers.to_json %>"
          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
