@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container d-flex flex-column align-items-center">
 
   <div class="my-equipment my-4">
 
@@ -7,7 +7,7 @@
     <% if @equipments.empty? %>
       <p class="message-purple">-- <%= @message %> --</p>
     <% else %>
-      <div class="cards d-flex flex-wrap">
+      <div class="cards d-flex flex-wrap justify-content-center">
 
       <% @equipments.each do |equipment| %>
 
@@ -43,12 +43,12 @@
 
   <div class="my-bookings my-4">
 
-    <h2 class="border-bottom my-4 py-2">My Bookings</h2>
+    <h2 class="border-bottom text-center my-4 py-2">MY BOOKINGS</h2>
 
     <% if @bookings.empty? %>
       <p class="message-purple">No bookings yet. Go see our equipment to start renting it!</p>
     <% else %>
-      <div class="cards d-flex flex-wrap">
+      <div class="cards d-flex flex-wrap justify-content-center">
         <% @bookings.each do |booking| %>
 
           <div class="card-product m-3">
@@ -89,12 +89,12 @@
 
   <div class="rentals my-4">
 
-    <h2 class="border-bottom my-4 py-2">My Past Rental Requests</h2>
+    <h2 class="border-bottom text-center my-4 py-2">MY PAST RENTALS</h2>
 
     <% if @requests_on.empty? %>
       <p class="message-purple">No previous rentals</p>
     <% else %>
-      <div class="cards d-flex flex-wrap">
+      <div class="cards d-flex flex-wrap justify-content-center">
         <% @requests_on.each do |request| %>
 
           <div class="card-product m-3">
